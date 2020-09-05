@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Pegawai @endsection
+@section('title') Tambah Pegawai @endsection
 
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -79,10 +79,10 @@
                   </span>
               @enderror
          </div>
-         </div>
+    
          
-         <button type="submit" class="btn btn-primary">Tambah Data</button>
-         <a href="{{route('employee.index')}}" class="btn btn-light pull-right">Kembali</a>
+         <button type="submit" class="btn btn-primary">Submit</button>
+      
    </div>
    </form>
 </div>

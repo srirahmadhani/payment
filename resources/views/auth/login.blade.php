@@ -41,9 +41,13 @@
                     <h1 class="h4 text-gray-900 mb-4">Kampung Sarosah </h1>
                     <!-- <h2 class="h4 text-gray-900 mb-4"> Login</h2> -->
                   </div>
-                    <form class="user" method="POST" action="{{ route('login') }}">
+                    <form class="user" method="POST" action="{{ route('cek_login') }}">
                       @csrf
-
+                            @if (session('Status'))
+                              <div class="alert alert-danger">
+                                 {{ session('Status') }}
+                              </div>
+                            @endif
 
                     <div class="form-group">
                       <input id="email" class="form-control form-control-user" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address...">

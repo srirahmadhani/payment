@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Pegawai @endsection
+@section('title') Edit Pegawai @endsection
 
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -11,7 +11,7 @@
 <div class="container">
 <div class="card">
 <div class="card-header">
-   <h6 class="m-0 font-weight-bold text-primary">Form Edit Pegawai</h6>
+   <h6 class="m-0 font-weight-bold text-primary">Edit <b>{{$employee->employee_name}}</h6>
 </div>
 <div class="card-body">
       <form method="POST" action="{{route('employee.update', $employee->employee_id)}}">
@@ -73,7 +73,7 @@
                placeholder="Masukkan Password" name="password"  value="{{$employee->user->password}}"required>
          </div>
 
-         <button type="submit" class="btn btn-primary">Simpan Data</button>
-         <a href="{{route('employee.index')}}" class="btn btn-light pull-right">Kembali</a>
+         <button type="submit" class="btn btn-primary">Submit</button>
+       
       </form>
 @endsection

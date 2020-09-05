@@ -10,13 +10,15 @@
 <div class="card">
 <div class="card-header">
    <h6 class="m-0 font-weight-bold text-primary">Detail  <b>{{$visitor->visitor_name}}</b></h6>
+   <div class="text-right">
+    <a href="{{ url('visitor/cetak/qr/'.$visitor->visitor_id) }}" class="btn btn-success"  style="text-align: right;">
+       <span class="fa fa-print"></span> Print
+    </a>
+    </div>
 </div>
 
 <div class="card-body">
-
-    <a href="{{ url('visitor/cetak/qr/'.$visitor->visitor_id) }}" class="btn btn-success">
-       <span class="fa fa-print"></span> Print
-    </a>
+    
 
        <div class="form-group">
          <label for="address" class="col-md-2 control-label" >QR Code</label>

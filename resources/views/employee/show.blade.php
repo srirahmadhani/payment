@@ -56,6 +56,6 @@
                   value="{{ $employee->position_name }}" readonly="">
             </div>
          </div>
-   <a href="{{route('employee.index')}}" class="btn btn-light pull-right">Kembali</a>
+   
 </div>
 @endsection

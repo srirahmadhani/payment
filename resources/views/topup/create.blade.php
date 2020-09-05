@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Pegawai @endsection
+@section('title') Isi Top Up @endsection
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"></h1>
@@ -44,21 +44,20 @@
                            <thead>
                               <tr>
                                  <th>ID</th>
-                                 <th>
-                                    Nama
-                                 </th>
-                                 <th>
-                                    Jenis Kelamin
-                                 </th>
+                                 <th>Nama</th>
+                                 <th>Jenis Kelamin</th>
+                                 <th>Email</th>
                                  <th>Alamat</th>
                               </tr>
                            </thead>
                            <tbody>
                               @foreach($visitor as $dataVisitor)
-                              <tr class="pilih" data-visitor_id="{{$dataVisitor->visitor_id}}" data-visitor_name="{{ $dataVisitor->visitor_name }}" >
+                              <tr class="pilih" data-visitor_id="{{$dataVisitor->visitor_id}}" 
+                                data-visitor_name="{{ $dataVisitor->visitor_name }}">
                                  <td>{{$dataVisitor->visitor_code}}</td>
                                  <td>{{$dataVisitor->visitor_name}}</td>
                                  <td>{{$dataVisitor->gender}}</td>
+                                 <td>{{$dataVisitor->user->email}}</td>
                                  <td>{{$dataVisitor->address}}</td>
                               </tr>
                               @endforeach
@@ -72,7 +71,7 @@
          <div class="form-group">
             @foreach($employee as $dataE)
             @if($dataE->id_user==Auth::user()->id AND $dataE->id_position == 'KS3' OR $dataE->id_position == 'KS2') 
-            <input type="text" value="{{$dataE->NIK}}" name="pegawai" hidden readonly="">            
+            <input type="text" value="{{$dataE->employee_id}}" name="pegawai" hidden readonly="">            
             @endif
             @endforeach
          </div>
@@ -81,8 +80,8 @@
             <input type="number" class="form-control" id="amount" placeholder="Masukkan Jumlah" name="amount"  
                value="{{ old('amount') }}"required>
          </div>
-         <button type="submit" class="btn btn-primary">Tambah Data</button>
-         <a href="{{route('employee.index')}}" class="btn btn-light pull-right">Kembali</a>
+         <button type="submit" class="btn btn-primary">Submit</button>
+         
    </div>
    </form>
 </div>

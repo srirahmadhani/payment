@@ -10,8 +10,7 @@
 @section('content')
 <div class="container">
 <div class="card">
-<div class="card-header">
-   <h6 class="m-0 font-weight-bold text-primary">Form Edit Kategori Tiket</h6>
+<div class="card-header"> <h6 class="m-0 font-weight-bold text-primary">Edit <b>{{$ticket->ticket_name}}</b></h6>
 </div>
 <div class="card-body">
 <form method="POST" action="{{route('ticket.update',$ticket->ticket_id)}}" enctype="multipart/form-data">
@@ -43,7 +42,7 @@
       <input type="text" class="form-control" id="info" name="info"  
          value="{{$ticket->info}}" required>
    </div>
-   <button type="submit" class="btn btn-primary">Simpan Data</button>
-   <a href="{{route('ticket.index')}}" class="btn btn-light pull-right">Kembali</a>
+   <button type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
 @endsection

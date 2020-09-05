@@ -16,7 +16,7 @@ class Payment extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'payment_id', 'payment_date', 'qty', 'total', 'visitor_id', 'ticket_id',
+        'payment_id', 'payment_date', 'qty', 'total', 'visitor_id', 'ticket_id', 'employee_id',
     ];
 
     public function visitor()
@@ -27,6 +27,11 @@ class Payment extends Model
     public function ticket()
     {
         return $this->belongsTo(Ticket::class, 'ticket_id', 'ticket_id');
+    }
+
+      public function employee()
+    {
+        return $this->belongsTo(Ticket::class, 'employee_id', 'emoloyee_id');
     }
 
     public function reportPaymentsPerYear($year)

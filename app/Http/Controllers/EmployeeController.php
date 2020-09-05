@@ -57,7 +57,15 @@ class EmployeeController extends Controller
         $this->validate($request,[
             'NIK' => ['required','unique:employees'],
             'password' => ['required','min:8'],
+            'email' => ['required', 'unique:users'],
+          
+            
+
+
+            // 'NIK' => ['required','max:16','unique:employees'],
+            // 'password' => ['required','min:8'],
             // 'email' => ['required', 'unique:users'],
+            // 'phone' => ['required','max:12', 'unique:employees'],
         ]);
 
         $id_user = User::create([

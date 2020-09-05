@@ -101,9 +101,8 @@
             </div>
 
 
-      <button type="submit" class="btn btn-primary">Tambah Data</button>
-      <a href="{{route('payment.index')}}" class="btn btn-light pull-right">Kembali</a>
-   </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+         </div>
    </form>
 </div>
       

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Tiket @endsection
+@section('title') Tambah Tiket @endsection
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"></h1>
@@ -40,8 +40,7 @@
             placeholder="Masukkan Keterangan" name="info" 
             value="{{ old('info') }}" required>
       </div>
-      <button type="submit" class="btn btn-primary">Tambah Data</button>
-      <a href="{{route('ticket.index')}}" class="btn btn-light pull-right">Back</a>
+      <button type="submit" class="btn btn-primary">Submit</button>
    </form>
 </div>
 @endsection

@@ -82,7 +82,7 @@ class PaymentController extends Controller
 
         if($saldo < $request->total)
         {
-            return redirect()->route('payment.create')->with('Status', 'Saldo visitor tidak mencukupi!');
+            return redirect()->route('payment.create')->with('Status', 'Saldo pengunjung tidak mencukupi!');
         }
         else
         {

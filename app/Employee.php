@@ -9,7 +9,7 @@ class Employee extends Model
 
     protected $primaryKey = 'employee_id';
 
-    protected $keyType = 'string';
+    // protected $keyType = 'string';
 
     protected $table = 'employees';
 
@@ -29,6 +29,12 @@ class Employee extends Model
     {
         return $this->hasMany(Topup::class);
     }
+
+     public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 
 }
 

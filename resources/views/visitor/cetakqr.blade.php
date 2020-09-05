@@ -20,7 +20,7 @@
                             <br><br>
                             <h2>Kampung Sarosah</h2>
                             <h5><b>Payakumbuh</b></h5>
-                            <span><span class="fa fa-envelope"></span> E-mail : admin@gmail.com,
+                            <span><span class="fa fa-envelope"></span> E-mail : kampungsarosah@gmail.com,
                                 <span class="fa fa-phone"></span> phone :
                                 081122334455</span>
                         </center>
@@ -46,21 +46,22 @@
 						            </script>
                         		</td>
                         		<td style="text-align: left; width: 100px;">
-                        			Visitor Code
+                        			Registrasi
                         		</td>
                         		<td style="width: 5px; ">:</td>
-                        		<td style="text-align: left;">{{ $visitor->visitor_code }}</td>
+                        		<td style="text-align: left;">{{ $visitor->user->register_date}}</td>
                         	</tr>
-                        	<tr>
+                                                   	<tr>
                         		<td style="text-align: left;">
-                        			Visitor Name
+                        			Nama
                         		</td>
                         		<td style="width: 5px; ">:</td>
                         		<td style="text-align: left;">{{ $visitor->visitor_name }}</td>
                         	</tr>
+
                         	<tr>
                         		<td style="text-align: left;">
-                        			Visitor Email
+                        			Email
                         		</td>
                         		<td style="width: 5px; ">:</td>
                         		<td style="text-align: left;">{{ $user->email }}</td>

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Pengunjung @endsection
+@section('title') Edit Pengunjung @endsection
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"></h1>
@@ -53,7 +53,6 @@
          placeholder="Masukkan Password" name="password"  value="{{$visitor->password}}"required>
   </div>
 
-   <button type="submit" class="btn btn-primary">Simpan Data</button>
-   <a href="{{route('visitor.index')}}" class="btn btn-light pull-right">Kembali</a>
+   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

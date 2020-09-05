@@ -14,7 +14,7 @@ class Visitor extends Model
 
     protected $primaryKey = 'visitor_id';
 
-    protected $keyType = 'string';
+    // protected $keyType = 'string';
 
     protected $fillable = [
         'visitor_id', 'visitor_name', 'gender', 'address', 'visitor_code'

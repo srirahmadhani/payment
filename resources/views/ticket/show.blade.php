@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Detail Kategori Tiket @endsection
+@section('title') Detail Tiket @endsection
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"></h1>
@@ -15,7 +15,7 @@
 <div class="form-group">
 <div class="form-group">
    <div class="col-md-6">
-      <img width="200" height="200" @if($ticket->image) 
+      <img width="500" height="320" @if($ticket->image) 
       src="{{ asset('image/'.$ticket->image) }}" @endif />
    </div>
 </div>
@@ -34,6 +34,6 @@
    <div class="col-md-6">
       <input type="text" class="form-control" name="price" value="{{ $ticket->price }}" readonly="">
    </div>
-   <a href="{{route('ticket.index')}}" class="btn btn-light pull-right">Back</a>
+  
 </div>
 @endsection

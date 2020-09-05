@@ -80,7 +80,7 @@ class TopupController extends Controller
             'topup_date' => date(now()),
             'amount' => $request->amount,
             'id_visitor' => $request->visitor_id,
-            'employee_nik' => $request->pegawai
+            'employee_id' => $request->pegawai
         ]);
 
         DB::commit();

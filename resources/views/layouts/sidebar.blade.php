@@ -12,7 +12,7 @@
    <!-- Nav Item - Dashboard -->
    <li class="nav-item active">
       <a class="nav-link" href="{{ url('/home') }}">
-      <i class="fas fa-fw fa-tachometer-alt" ></i>
+      <i class="fas fa-fw fa-chart-line" ></i>
       <span>Dashboard </span></a>
    </li>
    <!-- Divider -->
@@ -24,7 +24,7 @@
    @if($authposition == 'KS2')
    <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-         <i class="fas fa-fw fa-cog"></i>
+         <i class="fas fa-fw fa-folder-open"></i>
          <span>Data Master</span>
          </a>
          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -41,7 +41,7 @@
    @if($authposition =='KS3' or $authposition == 'KS2')
 <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-      <i class="fas fa-fw fa-wrench"></i>
+      <i class="fas fa-fw fa-credit-card"></i>
       <span>Transaksi</span>
       </a>
       <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -58,7 +58,7 @@
    @if($authposition == 'KS1' OR $authposition == 'KS2')
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-      <i class="fas fa-fw fa-chart-area"></i>
+      <i class="fas fa-fw fa-table"></i>
       <span>Laporan</span>
       </a>
       <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">

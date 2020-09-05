@@ -15,7 +15,7 @@ class Topup extends Model
     protected $keyType= 'string';
 
 	protected $fillable = [
-        'topup_id', 'topup_date', 'amount', 'id_visitor','employee_nik',
+        'topup_id', 'topup_date', 'amount', 'id_visitor','employee_id',
     ];
    
    public function visitor()
@@ -25,6 +25,6 @@ class Topup extends Model
 
     public function employee()
     {
-    	return $this->belongsTo(Employee::class, 'employee_nik', 'NIK');
+    	return $this->belongsTo(Employee::class, 'employee_id', 'employee_id');
     }
 }

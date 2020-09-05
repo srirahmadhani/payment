@@ -18,3 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', "API\Autentikasi@cekLogin");
+Route::get('/ticket/{ticket_id?}', "API\TicketApi@index");
+Route::get('/topup/{id_visitor?}', "API\TopupApi@index");
+Route::get('/payment/{id_visitor?}', "API\PaymentApi@index");
+Route::get('/visitor/{visitor_id?}', "API\VisitorApi@index");

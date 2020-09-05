@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Pengunjung @endsection
+@section('title') Tambah Pengunjung @endsection
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"></h1>
@@ -57,9 +57,7 @@
                   </span>
               @enderror
          </div>
-   </div>
-   <button type="submit" class="btn btn-primary">Tambah Data</button>
-   <a href="{{route('visitor.index')}}" class="btn btn-light pull-right">Back</a>
+   <button type="submit" class="btn btn-primary">Submit</button>
    </form>
 </div>
 @endsection
