@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Sep 2020 pada 05.23
+-- Waktu pembuatan: 07 Sep 2020 pada 06.24
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -48,7 +48,8 @@ INSERT INTO `employees` (`NIK`, `employee_name`, `gender`, `phone`, `address`, `
 ('1234567890123452', 'Manajer', 'P', '03837363635', 'payakumbuh', 'KS1', 17),
 ('1234567890123461', 'hamid', 'L', '0987654321234', 'padang', 'KS1', 20),
 ('1234567890123471', 'Admin', 'L', '03837363635', 'padang', 'KS2', 28),
-('1234567890123469', 'Rasyid Abdurrahman', 'L', '0383736363598', 'Payolansek, Payakumbuh', 'KS4', 30);
+('1234567890123469', 'Rasyid Abdurrahman', 'L', '0383736363598', 'Payolansek, Payakumbuh', 'KS4', 30),
+('1234567890123498', 'Fasya', 'P', '038373636359', 'payakumbuh', 'KS3', 31);
 
 -- --------------------------------------------------------
 
@@ -94,8 +95,19 @@ CREATE TABLE `payments` (
   `qty` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `visitor_id` int(12) NOT NULL,
-  `ticket_id` varchar(4) NOT NULL
+  `ticket_id` varchar(4) NOT NULL,
+  `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `payments`
+--
+
+INSERT INTO `payments` (`payment_id`, `payment_date`, `qty`, `total`, `visitor_id`, `ticket_id`, `employee_id`) VALUES
+('TR000000001', '2020-09-05 04:29:50', 1, 5000, 24, 'WS01', 31),
+('TR000000002', '2020-09-05 04:44:27', 1, 5000, 24, 'WS01', 15),
+('TR000000003', '2020-09-07 03:29:10', 1, 5000, 24, 'WS01', 16),
+('TR000000004', '2020-09-07 04:19:51', 1, 5000, 24, 'WS01', 16);
 
 --
 -- Trigger `payments`
@@ -18804,15 +18816,18 @@ CREATE TABLE `topup` (
   `topup_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `amount` int(11) NOT NULL,
   `id_visitor` int(12) NOT NULL,
-  `employee_nik` varchar(16) NOT NULL
+  `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `topup`
 --
 
-INSERT INTO `topup` (`topup_id`, `topup_date`, `amount`, `id_visitor`, `employee_nik`) VALUES
-('TP000000001', '2020-09-04 02:49:19', 1000, 24, '1234567890123471');
+INSERT INTO `topup` (`topup_id`, `topup_date`, `amount`, `id_visitor`, `employee_id`) VALUES
+('TP000000001', '2020-09-05 04:20:34', 80000, 24, 15),
+('TP000000002', '2020-09-05 04:21:38', 10000, 24, 16),
+('TP000000003', '2020-09-05 04:24:10', 7000, 24, 31),
+('TP000000004', '2020-09-07 03:32:16', 20000, 24, 16);
 
 --
 -- Trigger `topup`
@@ -18837,22 +18852,27 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `level` int(2) NOT NULL
+  `level` int(2) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `register_date`, `level`) VALUES
-(15, 'admiin@gmail.com', '$2y$10$1M6smnJ5B/R5YAXxcae6VO8cCUpnSbC/ynPGulgNJVDaNiUtdFxnK', '2020-09-04 02:14:32', 1),
-(16, 'kasir@gmail.com', '$2y$10$7PG6ABYlYMwIBHoCNW0Uy.CZE4LaYisKMBBNpNajLCucTEwARjcna', '2020-09-04 02:14:40', 1),
-(17, 'manajer@gmail.com', '$2y$10$EQmgue/6h0dd0OXxWlqJuOaQCIdmQeixSvL24YmiH2wS7g1YRTy2G', '2020-09-04 02:14:47', 1),
-(20, 'hamid@gmail.com', '$2y$10$NLHunOVrVl7fYQN7lf8I4udkL1clXXMYEA4rZGwTUwNLzlQqx5txe', '2020-09-04 02:14:55', 1),
-(24, 'ruby@gmail.com', '$2y$10$LOUvVtnN.WRsejCV9lDOJO7hxsp.4V.v7H1.nJQhdVTzVfpdQnTCi', '2020-09-04 02:15:03', 2),
-(28, 'admin@gmail.com', '$2y$10$mf2jn/XQQTv69CzhH7LIgeM.QGrs5aLIPqGUqtsHW3bCNnxbxdWtq', '2020-09-04 02:15:12', 1),
-(29, 'farisyahputra@gmail.com', '$2y$10$4fi4FLDkbBsgS18aKFgow.IRNR8Qbb1AIFjASwqig.u4sLzM53V1e', '2020-09-04 02:15:20', 2),
-(30, 'rasyid@gmail.com', '$2y$10$gHwICg30jAq8AdAUrr76ZeN9fEQhYfnFVSREiK394/aqgG0KlJrMO', '2020-09-04 02:15:29', 1);
+INSERT INTO `users` (`id`, `email`, `password`, `register_date`, `level`, `status`) VALUES
+(15, 'admiin@gmail.com', '$2y$10$1M6smnJ5B/R5YAXxcae6VO8cCUpnSbC/ynPGulgNJVDaNiUtdFxnK', '2020-09-04 02:14:32', 1, 1),
+(16, 'kasir@gmail.com', '$2y$10$7PG6ABYlYMwIBHoCNW0Uy.CZE4LaYisKMBBNpNajLCucTEwARjcna', '2020-09-07 03:51:19', 1, 0),
+(17, 'manajer@gmail.com', '$2y$10$EQmgue/6h0dd0OXxWlqJuOaQCIdmQeixSvL24YmiH2wS7g1YRTy2G', '2020-09-04 02:14:47', 1, 1),
+(20, 'hamid@gmail.com', '$2y$10$NLHunOVrVl7fYQN7lf8I4udkL1clXXMYEA4rZGwTUwNLzlQqx5txe', '2020-09-04 02:14:55', 1, 1),
+(24, 'rudii@gmail.com', '$2y$10$OXxHBhXMm/Yam347yCK9i.s2YllL7o2eWcKxbDFEF9jas4JwzFg8u', '2020-09-07 03:58:45', 2, 0),
+(28, 'admin@gmail.com', '$2y$10$mf2jn/XQQTv69CzhH7LIgeM.QGrs5aLIPqGUqtsHW3bCNnxbxdWtq', '2020-09-04 02:15:12', 1, 1),
+(29, 'farisyahputra@gmail.com', '$2y$10$4fi4FLDkbBsgS18aKFgow.IRNR8Qbb1AIFjASwqig.u4sLzM53V1e', '2020-09-04 02:15:20', 2, 1),
+(30, 'rasyid@gmail.com', '$2y$10$gHwICg30jAq8AdAUrr76ZeN9fEQhYfnFVSREiK394/aqgG0KlJrMO', '2020-09-04 02:15:29', 1, 1),
+(31, 'kasir2@gmail.com', '$2y$10$GETqOm6c1ldCfVwACENUZObDi0I7TNeSjq9OxA2rCWbLsGI6SSiJy', '2020-09-05 04:23:45', 1, 1),
+(33, 'azizah@gmail.con', '$2y$10$Lw1p6lF8aroWb.e/j/XXO.3DlwrP8qg3RQ4d9LyPjeonolokWPjLG', '2020-09-07 02:43:40', 2, 1),
+(35, 'hamdan@gmail.con', '$2y$10$yL3TY/s.9po9cm00IHuuaOA.nviaac2AAQyC2z0CuorzT9AdEts2K', '2020-09-07 02:49:53', 2, 1),
+(36, 'lala@gmail.com', '12312312', '2020-09-07 03:07:51', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -18874,8 +18894,11 @@ CREATE TABLE `visitors` (
 --
 
 INSERT INTO `visitors` (`visitor_code`, `visitor_name`, `gender`, `address`, `visitor_id`, `saldo`) VALUES
-('PG00000001', 'Ruby', 'L', 'Bukittinggiii', 24, 1000),
-('PG00000002', 'Farisyahputra', 'L', 'Kapalo Koto, Pauh, Padang', 29, 0);
+('PG000000001', 'rudi', 'L', 'padang pariaman', 24, 97000),
+('PG000000002', 'Farisyahputra', 'L', 'Kapalo Koto, Pauh, Padang', 29, 0),
+('PG000000003', 'azizah', '', 'payakumbuh', 33, 0),
+('PG000000004', 'hamdan', 'L', 'payakumbuh', 35, 0),
+('PG000000005', 'lala', 'P', 'padang pariaman', 36, 0);
 
 --
 -- Indexes for dumped tables
@@ -18886,6 +18909,7 @@ INSERT INTO `visitors` (`visitor_code`, `visitor_name`, `gender`, `address`, `vi
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`employee_id`),
+  ADD UNIQUE KEY `NIK` (`NIK`),
   ADD KEY `id_jabatan` (`id_position`);
 
 --
@@ -18906,7 +18930,8 @@ ALTER TABLE `password_resets`
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`payment_id`),
   ADD KEY `id_kategori` (`ticket_id`),
-  ADD KEY `visitor_id` (`visitor_id`);
+  ADD KEY `visitor_id` (`visitor_id`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indeks untuk tabel `positions`
@@ -18932,7 +18957,8 @@ ALTER TABLE `times`
 --
 ALTER TABLE `topup`
   ADD PRIMARY KEY (`topup_id`),
-  ADD KEY `visitor_id` (`id_visitor`);
+  ADD KEY `visitor_id` (`id_visitor`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indeks untuk tabel `users`
@@ -18968,7 +18994,7 @@ ALTER TABLE `times`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -18984,7 +19010,14 @@ ALTER TABLE `employees`
 -- Ketidakleluasaan untuk tabel `payments`
 --
 ALTER TABLE `payments`
-  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `payments_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `topup`
+--
+ALTER TABLE `topup`
+  ADD CONSTRAINT `topup_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
