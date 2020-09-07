@@ -23,9 +23,8 @@ class PaymentController extends Controller
         
         $payment = Payment::all();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('payment.index', compact('payment', 'authposition','authname'));
 
@@ -54,9 +53,8 @@ class PaymentController extends Controller
         $visitor = Visitor::get();
         $ticket = Ticket::get();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
         
         return view ('payment.create',compact('kode','visitor', 'ticket', 'authposition','authname'));
     }
@@ -92,7 +90,8 @@ class PaymentController extends Controller
                 'qty'=>$request->qty,
                 'total' =>$request->total,
                 'visitor_id' => $request->visitor_id,
-                'ticket_id' => $request->tiket
+                'ticket_id' => $request->tiket,
+                'employee_id' => $request->session()->get('id')
            ]);
            DB::commit();
            return redirect()->route('payment.index')->with('Status', 'Data Pegawai berhasil ditambahkan!');
@@ -119,9 +118,8 @@ class PaymentController extends Controller
                 ->first();
 
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
          return view ('payment.show',compact('payment', 'authposition','authname'));
     }

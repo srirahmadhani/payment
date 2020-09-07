@@ -34,6 +34,7 @@
                   <th>Tiket</th>
                   <th>Jumlah</th>
                   <th>Total</th>
+                  <th>Pegawai</th>
                   <th>Aksi</th>
                </tr>
             </thead>
@@ -47,6 +48,7 @@
                   <td>{{$pay->ticket->ticket_name}}</td>
                   <td>{{$pay->qty}}</td>
                   <td>@currency($pay->total)</td>
+                  <td>{{$pay->employee->employee_name}}</td>
                   <td>
                      <a href="{{route('payment.show',$pay->payment_id)}}" class="btn btn-success btn-sm d-inline">
                      <i class="fas fa-eye"></i>

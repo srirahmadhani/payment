@@ -13,9 +13,9 @@ class ReportController extends Controller
 {
     public function topupindex(Request $request)
     {
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         if ($request->type == 'search') {
             $topup = Topup::whereBetween(DB::raw('DATE(topup_date)'), [$request->date_start, $request->date_end])->get();
@@ -33,9 +33,9 @@ class ReportController extends Controller
     {
         $payment = Payment::all();
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
          if ($request->type == 'search') {
             $payment = Payment::whereBetween(DB::raw('DATE(payment_date)'), [$request->date_start, $request->date_end])->get();

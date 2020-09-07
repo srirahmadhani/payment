@@ -19,6 +19,7 @@
             @endif
          <form method="POST" action="{{route('payment.store')}}" enctype="multipart/form-data">
             @csrf
+
             <div class="form-group">
                <label for="nama">ID</label>
                <input type="text" class="form-control"  id="id" name="id" value="{{$kode}}" >

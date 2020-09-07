@@ -21,9 +21,9 @@ class TopupController extends Controller
     {
         $topup = Topup::all();
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('topup.index', compact('topup', 'authposition', 'authname'));
     }
@@ -32,9 +32,9 @@ class TopupController extends Controller
     {
         $topup = Topup::where('topup_id', '=', $request->id)->first();
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('topup.print', compact('topup', 'authposition', 'authname'));
     }
@@ -53,9 +53,9 @@ class TopupController extends Controller
         $visitor = Visitor::get();
         $employee = Employee::get();
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('topup.create', compact('kode', 'visitor', 'employee', 'authposition', 'authname'));
     }

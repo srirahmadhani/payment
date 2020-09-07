@@ -78,7 +78,7 @@
                     <div class="col-md-4 offset-8 mt-5">
                         Payakumbuh, @php echo date('d F Y') @endphp
                         <br><br><br><br>
-                        <b><u>{{ $authname }}</u></b>
+                        <b><u>{{ session()->get('name') }}</u></b>
                     </div>
                 </div>
             </div>

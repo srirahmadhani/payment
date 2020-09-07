@@ -20,9 +20,8 @@ class EmployeeController extends Controller
     {
         $employee = Employee::all();
         
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('employee.index', compact('employee','authposition','authname'));
     }
@@ -37,9 +36,8 @@ class EmployeeController extends Controller
 
         $position = Position::all();
         
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('employee.create', compact('position','authposition','authname'));
     }
@@ -55,17 +53,17 @@ class EmployeeController extends Controller
         DB::beginTransaction();
 
         $this->validate($request,[
-            'NIK' => ['required','unique:employees'],
-            'password' => ['required','min:8'],
-            'email' => ['required', 'unique:users'],
+            // 'NIK' => ['required','unique:employees'],
+            // 'password' => ['required','min:8'],
+            // 'email' => ['required', 'unique:users'],
           
             
 
 
-            // 'NIK' => ['required','max:16','unique:employees'],
-            // 'password' => ['required','min:8'],
-            // 'email' => ['required', 'unique:users'],
-            // 'phone' => ['required','max:12', 'unique:employees'],
+            'NIK' => 'required|max:16|unique:employees',
+            'password' => 'required|min:8',
+            'email' => 'required|unique:users',
+            'phone' => 'required|max:12|unique:employees'
         ]);
 
         $id_user = User::create([
@@ -79,7 +77,7 @@ class EmployeeController extends Controller
             'NIK' => $request->NIK, 
             'employee_name' => $request->nama, 
             'gender' => $request->gender, 
-            'phone' => $request->hp, 
+            'phone' => $request->phone, 
             'address' => $request->alamat, 
             'id_position' => $request->jabataan, 
             'employee_id' => $id_user
@@ -105,9 +103,8 @@ class EmployeeController extends Controller
                 ->where('employees.employee_id','=', $id)
                 ->first();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('employee.show', compact('employee','authposition','authname'));
     }
@@ -123,9 +120,8 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $position = Position::All();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
         
         // $pengunjung=Pengunjung::where('id_pengunjung','=',$id)->first();
         return view('/employee.edit', compact('employee', 'position', 'authposition','authname'));
@@ -157,7 +153,14 @@ class EmployeeController extends Controller
         $user = User::find($id);
 
         $user->email = $request->email;
-        $user->password = $request->password;
+
+        if(!empty($request->password))
+        {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->status = $request->status;
+        
         $user->save();
 
         DB::commit();

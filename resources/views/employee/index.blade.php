@@ -36,6 +36,7 @@
                   <th>Nama</th>
                   <th>Email</th>
                   <th>jabatan</th>
+                  <th>Status</th>
                   <th>Aksi</th>
                </tr>
             </thead>
@@ -47,6 +48,13 @@
                   <td>{{$peg->employee_name}}</td>
                   <td>{{$peg->user->email}}</td>
                   <td>{{$peg->position->position_name}}</td>
+                    <td>
+                     @if($peg->user->status == 1)
+                     Aktif
+                     @else
+                     Tidak Aktif
+                     @endif
+                  </td>
                   <td>
                      <a href="{{route('employee.show',$peg->employee_id)}}"
                         class="btn btn-primary btn-sm d-inline"><i class="fas fa-eye"></i> </a>  

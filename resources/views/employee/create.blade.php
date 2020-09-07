@@ -40,9 +40,14 @@
          </div>
          
          <div class="form-group">
-            <label for="hp">HP</label>
-            <input type="text" class="form-control @error ('hp') is-invalid @enderror" id="hp" 
-               placeholder="Masukkan nomor Hp" name="hp"  value="{{ old('hp') }}"required>
+            <label for="phpne">HP</label>
+            <input type="text" class="form-control @error ('phone') is-invalid @enderror" id="phone" 
+               placeholder="Masukkan nomor Hp" name="phone"  value="{{ old('phone') }}"required>
+               @error('phone')
+                <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
          </div>
          <div class="form-group">
             <label for="alamat">Alamat</label>

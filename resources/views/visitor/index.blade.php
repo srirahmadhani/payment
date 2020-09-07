@@ -35,6 +35,7 @@
                   <th>Alamat</th>
                   <th>Email</th>
                   <th>Saldo</th>
+                  <th>Status</th>
                   <th>Aksi</th>
                </tr>
             </thead>
@@ -54,6 +55,13 @@
                   <td>{{$vst->address}}</td>
                   <td>{{$vst->email}}</td>
                   <td>@currency($vst->saldo)</td>
+                  <td>
+                     @if($vst->status == 1)
+                     Aktif
+                     @else
+                     Tidak Aktif
+                     @endif
+                  </td>
 
                   <form method="POST" action="{{route('visitor.destroy', $vst->visitor_id)}}">
                      @csrf

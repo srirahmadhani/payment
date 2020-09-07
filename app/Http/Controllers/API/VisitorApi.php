@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Visitor;
 use App\User;
+use App\Payment;
+use App\Topup;
+use App\Employee;
+use App\Position;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class VisitorApi extends Controller
 {
@@ -26,11 +33,6 @@ class VisitorApi extends Controller
         $no_urut = (int)substr($max, 9, 9) + 1;
         $kode = "PG" . sprintf("%09s", $no_urut);
 
-        $this->validate($request, [
-            'password' => ['required', 'min:8'],
-            'email' => ['required', 'unique:users'],
-        ]);
-
         $id_user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request['password']),
@@ -38,23 +40,49 @@ class VisitorApi extends Controller
             'register_date' => date("Y-m-d H:i:s")
         ])->id;
 
-        $validasi = $request->validate([
-            'name' => 'required',
-            'gender' => 'required',
-            'address' => 'required',
-        ]);
 
         $visitor = Visitor::create([
-            'visitor_code' => $request->id,
+            'visitor_code' => $kode,
             'visitor_name' => $request->name,
-            'gender' => $request->gender, 'address' => $request->address,
+            'gender' => $request->gender,
+            'address' => $request->address,
             'visitor_id' => $id_user
         ]);
 
         DB::commit();
+        return response()->json(ResponseOk("Registrasi berhasil"));
 
          
     }
 
-   
+
+    public function editprofil(Request $request, $visitor_id = null)
+    {
+        DB::beginTransaction();
+        $visitor = Visitor::find($visitor_id);
+
+        if(empty($visitor))
+        {
+            return response()->json(ResponseError("Profil tidak ditemukan"));
+        }
+
+        $visitor->visitor_name = $request->name;
+        $visitor->gender = $request->gender;
+        $visitor->address = $request->address;
+        $visitor->save();
+
+        $user = User::find($visitor_id);
+
+        $user->email = $request->email;
+        if(!empty($request->password))
+        {
+            $user->password = Hash::make($request->password);       
+        }
+
+        $user->save();
+
+        DB::commit();
+
+        return response()->json(ResponseOk("Edit profil berhasil"));
+    }
 }

@@ -21,6 +21,11 @@ class Autentikasi extends Controller
             $cek_password = Hash::check($data_login['password'], $cek_email->password);
             if($cek_password)
             {
+                if($cek_email->status == 0)
+                {
+                    return response()->json(ResponseError("Akun Anda tidak aktif. Silahkan hubungi administrator!"));
+                }
+
                 if($cek_email->level == 1) // pegawai
                 {
                     $detail = Employee::find($cek_email->id);
@@ -44,12 +49,12 @@ class Autentikasi extends Controller
             }
             else
             {
-                return response()->json(ResponseError("Username atau password salah!"));
+                return response()->json(ResponseError("Email atau password salah!"));
             }
         }
         else
         {   
-            return response()->json(ResponseError("Username atau password salah!"));
+            return response()->json(ResponseError("Email salah!"));
         }
     }
 }

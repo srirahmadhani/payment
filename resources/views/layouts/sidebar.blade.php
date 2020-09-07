@@ -21,7 +21,7 @@
    <div class="sidebar-heading">
    </div>
    <!-- Nav Item - Pages Collapse Menu -->
-   @if($authposition == 'KS2')
+   @if(session()->get('id_position') == 'KS2')
    <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
          <i class="fas fa-fw fa-folder-open"></i>
@@ -38,7 +38,7 @@
       </li>
    <hr class="sidebar-divider">
    @endif
-   @if($authposition =='KS3' or $authposition == 'KS2')
+   @if(session()->get('id_position') =='KS3' or session()->get('id_position') == 'KS2')
 <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
       <i class="fas fa-fw fa-credit-card"></i>
@@ -55,7 +55,7 @@
    <!-- Divider -->
    <hr class="sidebar-divider">
    <!-- Nav Item - Data Master -->
-   @if($authposition == 'KS1' OR $authposition == 'KS2')
+   @if(session()->get('id_position') == 'KS1' OR session()->get('id_position') == 'KS2')
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
       <i class="fas fa-fw fa-table"></i>
@@ -71,7 +71,7 @@
    <hr class="sidebar-divider">
    
    <!-- Nav Item Transaksi-->
-  <!--  @if($authposition == 'KS1' or $authposition == 'KS2')
+  <!--  @if(session()->get('id_position') == 'KS1' or session()->get('id_position') == 'KS2')
    <hr class="sidebar-divider">
    <li class="nav-item">
       <a class="nav-link" href="{{ route('user') }}">

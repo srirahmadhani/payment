@@ -20,6 +20,7 @@ Route::post('/login', 'Autentikasi@cekLogin')->name('cek_login');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'Autentikasi@logout')->name('logout');
 
 
 //pengunjung

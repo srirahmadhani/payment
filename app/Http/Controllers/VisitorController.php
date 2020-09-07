@@ -28,9 +28,9 @@ class VisitorController extends Controller
         $payment = Payment::all();
         $topup = Topup::all();
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('visitor.index', compact('visitor_data', 'payment', 'topup', 'authposition', 'authname'));
     }
@@ -46,9 +46,9 @@ class VisitorController extends Controller
         $no_urut = (int)substr($max, 9, 9) + 1;
         $kode = "PG" . sprintf("%09s", $no_urut);
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('visitor.create', compact('kode', 'authposition', 'authname'));
     }
@@ -109,9 +109,9 @@ class VisitorController extends Controller
             ->where('visitor_id', '=', $id)
             ->first();
 
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
 
         return view('visitor.show', compact('visitor', 'authposition', 'authname'));
@@ -131,9 +131,9 @@ class VisitorController extends Controller
             ->where('visitor_id', '=', $id)
             ->first();
         // $pengunjung=Pengunjung::where('id_pengunjung','=',$id)->first();
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('/visitor.edit', compact('visitor', 'authposition', 'authname'));
     }
@@ -146,7 +146,6 @@ class VisitorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-
     {
         DB::beginTransaction();
 
@@ -161,7 +160,14 @@ class VisitorController extends Controller
         $user = User::find($visitor->visitor_id);
 
         $user->email = $request->email;
-        $user->password = $request->password;
+
+        if(!empty($request->password))
+        {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->status = $request->status;
+
         $user->save();
 
         DB::commit();

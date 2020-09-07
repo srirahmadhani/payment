@@ -31,7 +31,7 @@ class Payment extends Model
 
       public function employee()
     {
-        return $this->belongsTo(Ticket::class, 'employee_id', 'emoloyee_id');
+        return $this->belongsTo(Employee::class, 'employee_id', 'employee_id');
     }
 
     public function reportPaymentsPerYear($year)

@@ -21,35 +21,61 @@ class Autentikasi extends Controller
             $cek_password = Hash::check($data_login['password'], $cek_email->password);
             if($cek_password)
             {
-                if($cek_email->level == 1) // pegawai
+
+                if($cek_email->level == 2)
                 {
-                    $detail = Employee::find($cek_email->id);
-                    $name = $detail->employee_name;
-                    $code = $detail->NIK;
-                }
-                else // pengunjung
+                    return redirect()->route('login')->with('Status', "Email atau assword salah!");
+                }   
+
+                if($cek_email->status == 0)
                 {
-                    $detail = Visitor::find($cek_email->id);
-                    $name = $detail->visitor_name;
-                    $code = $detail->visitor_code;
+                    return redirect()->route('login')->with('Status', "Akun Anda tidak aktif. Silahkan hubungi administrator!");
                 }
+
+                $detail = Employee::find($cek_email->id);
+                $name = $detail->employee_name;
+                $nik = $detail->NIK;
+                $employee_name = $detail->employee_name;
+                $gender = $detail->gender;
+                $phone = $detail->phone;
+                $address = $detail->address;
+                $id_position = $detail->id_position;
 
                 $request->session()->put("id", $cek_email->id);
                 $request->session()->put("email", $cek_email->email);
                 $request->session()->put("level", $cek_email->level);
-                $request->session()->put("name", $cek_email->name);
-                $request->session()->put("code", $cek_email->code);
+                $request->session()->put("name", $name);
+                $request->session()->put("NIK", $nik);
+                $request->session()->put("gender", $gender);
+                $request->session()->put("phone", $phone);
+                $request->session()->put("address", $address);
+                $request->session()->put("id_position", $id_position);
+
                 return redirect()->route('home')->with('Status', "Anda berhasil login!");
-                
             }
             else
             {
-                return redirect()->route('login')->with('Status', "Username atau password salah!");
+                return redirect()->route('login')->with('Status', "Email atau assword salah!");
             }
         }
         else
         {   
-            return redirect()->route('login')->with('Status', "Username atau password salah!");
+            return redirect()->route('login')->with('Status', "Email salah!");
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget("id");
+        $request->session()->forget("email");
+        $request->session()->forget("level");
+        $request->session()->forget("name");
+        $request->session()->forget("NIK");
+        $request->session()->forget("gender");
+        $request->session()->forget("phone");
+        $request->session()->forget("address");
+        $request->session()->forget("id_position");
+
+        return redirect("/");
     }
 }

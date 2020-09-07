@@ -53,6 +53,18 @@
          placeholder="Masukkan Password" name="password"  value="{{$visitor->password}}"required>
   </div>
 
+   <div class="form-group">
+            <label for="gender">Status</label>
+            <select class="form-control" name="status" required="">
+               <option value=""disabled selected>-Pilih-</option>
+               <option value="1">Aktif</option>
+               <option value="0">Tidak Aktif</option>
+            </select>
+            <script>
+               document.getElementsByName("status")[0].value = "{{ $visitor->status }}";
+            </script>
+         </div>
+
    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

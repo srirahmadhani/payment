@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -47,9 +47,9 @@ class HomeController extends Controller
         $tiket_report = $tiket->reportPaymentsPerYearDonat($yeard);
 
         $paymenttahun = Payment::distinct()->select(DB::raw('YEAR(payment_date) AS payment_date'))->get();
-        $auth = Employee::where('employee_id', '=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
 
         $jml_visitor = Visitor::all()->count();

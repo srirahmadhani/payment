@@ -20,9 +20,8 @@ class PositionController extends Controller
 
         $position = Position::all();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('position.index', compact('position','authposition','authname'));
     }
@@ -36,9 +35,8 @@ class PositionController extends Controller
     {
         $max = Position::all();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view ('position.create',compact('max','authposition','authname'));
     }
@@ -87,9 +85,8 @@ class PositionController extends Controller
         $position = Position::find($id);
         // $pengunjung=Pengunjung::where('id_pengunjung','=',$id)->first();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view ('/position.edit',compact('position' ,'authposition','authname'));
     }

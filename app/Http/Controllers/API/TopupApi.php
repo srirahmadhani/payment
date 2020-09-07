@@ -5,6 +5,11 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Topup;
+use App\Visitor;
+use App\Employee;
+use App\Position;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class TopupApi extends Controller
 {
@@ -18,4 +23,26 @@ class TopupApi extends Controller
 
         return response()->json(ResponseOk($topup));
    }
+
+    public function store(Request $request)
+    {
+        DB::beginTransaction();
+
+        $max = Topup::max('topup_id');
+        $no_urut = (int) substr($max, 9, 9) + 1;
+        $kode = "TP" .sprintf("%09s", $no_urut);
+
+        $topup = Topup::create([
+            'topup_id' => $kode,
+            'topup_date' => date(now()),
+            'amount' => $request->amount,
+            'id_visitor' => $request->id_visitor,
+            'employee_id' => $request->employee_id
+        ]);
+
+        DB::commit();
+        return response()->json(ResponseOk("Topup berhasil"));
+
+    }
+
 }

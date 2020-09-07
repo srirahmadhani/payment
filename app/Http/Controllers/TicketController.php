@@ -20,9 +20,8 @@ class TicketController extends Controller
     {
         $ticket = Ticket::all();
 
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         return view('ticket.index', compact('ticket','authposition','authname'));
     }
@@ -34,9 +33,8 @@ class TicketController extends Controller
      */
     public function create()
     {
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
         $max = Ticket::max('ticket_id');
         $no_urut = (int) substr($max, 2, 2) + 1;
@@ -87,9 +85,8 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
 
         $ticket = Ticket::find($id);
@@ -106,9 +103,8 @@ class TicketController extends Controller
      */
     public function edit($tkt)
     {
-        $auth =Employee::where('employee_id','=', Auth::user()->id)->first();
-        $authposition = $auth->id_position;
-        $authname = $auth->employee_name;
+        $authposition = session()->get('id_position');
+        $authname = session()->get('name');
 
 
         $ticket = Ticket::where('ticket_id',$tkt)->first();

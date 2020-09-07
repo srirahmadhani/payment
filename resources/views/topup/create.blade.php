@@ -70,8 +70,8 @@
          </div>
          <div class="form-group">
             @foreach($employee as $dataE)
-            @if($dataE->id_user==Auth::user()->id AND $dataE->id_position == 'KS3' OR $dataE->id_position == 'KS2') 
-            <input type="text" value="{{$dataE->employee_id}}" name="pegawai" hidden readonly="">            
+            @if(session()->get('id_position') == 'KS3' OR session()->get('id_position') == 'KS2') 
+            <input type="text" value="{{ session()->get('id') }}" name="pegawai" hidden readonly="">            
             @endif
             @endforeach
          </div>
