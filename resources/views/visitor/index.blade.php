@@ -29,7 +29,6 @@
             <thead>
                <tr>
                   <th scope="col">#</th>
-                  <th>ID </th>
                   <th>Nama </th>
                   <th>Jenis Kelamin</th>
                   <th>Alamat</th>
@@ -43,10 +42,9 @@
                @foreach ($visitor_data as $vst)
                <tr>
                   <th scope="row">{{$loop->iteration}}</th>
-                  <td>{{$vst->visitor_id}}</td>
                   <td>{{$vst->visitor_name}}</td>
                   <td>
-                     @if($vst->gender == 'L')
+                     @if($vst->gender == 1)
                      Laki-Laki
                      @else
                      Perempuan

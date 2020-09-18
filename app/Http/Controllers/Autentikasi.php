@@ -33,6 +33,12 @@ class Autentikasi extends Controller
                 }
 
                 $detail = Employee::find($cek_email->id);
+
+                if(!in_array($detail->id_position, array("KS1", "KS2", "KS3")))
+                {
+                    return redirect()->route('login')->with('Status', "Email atau assword salah!");
+                }
+
                 $name = $detail->employee_name;
                 $nik = $detail->NIK;
                 $employee_name = $detail->employee_name;

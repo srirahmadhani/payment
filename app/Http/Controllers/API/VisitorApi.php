@@ -20,18 +20,33 @@ class VisitorApi extends Controller
     {
         if($visitor_id != null)
         {
-            return response()->json(ResponseOk(Visitor::where("visitor_id", $visitor_id)->first()));
+            $visitor = Visitor::where("visitor_id", $visitor_id)->first();
+            $user = User::where("id", $visitor_id)->first();
+            $data_visitor = array(
+                "visitor_id"    => $visitor->visitor_id,
+                "visitor_name"    => $visitor->visitor_name,
+                "gender"    => $visitor->gender,
+                "address"    => $visitor->address,
+                "saldo"    => $visitor->saldo,
+                "id"    => $visitor->id,
+                "email"    => $user->email,
+                "level"    => $user->level,
+                "status"    => $user->status,
+                "register_date"    => $user->register_date,
+            );
+            return response()->json(ResponseOk($data_visitor));
         }
         return response()->json(ResponseOk(Visitor::all()));
     }
 
     public function registrasi(Request $request)
     {
-       DB::beginTransaction();
+        DB::beginTransaction();
 
-        $max = Visitor::max('visitor_code');
-        $no_urut = (int)substr($max, 9, 9) + 1;
-        $kode = "PG" . sprintf("%09s", $no_urut);
+        if(User::where("email", $request->email)->exists())
+        {
+            return response()->json(ResponseError("Email tidak dapat digunakan karena sudah terdaftar!"));
+        }
 
         $id_user = User::create([
             'email' => $request->email,
@@ -42,7 +57,6 @@ class VisitorApi extends Controller
 
 
         $visitor = Visitor::create([
-            'visitor_code' => $kode,
             'visitor_name' => $request->name,
             'gender' => $request->gender,
             'address' => $request->address,
@@ -59,6 +73,21 @@ class VisitorApi extends Controller
     public function editprofil(Request $request, $visitor_id = null)
     {
         DB::beginTransaction();
+        $user = User::find($visitor_id);
+        if($user->email != $request->email && User::where("email", $request->email)->exists())
+        {
+            return response()->json(ResponseError("Email tidak dapat digunakan karena sudah terdaftar!"));
+        }
+
+        $user->email = $request->email;
+        if(!empty($request->password))
+        {
+            $user->password = Hash::make($request->password);       
+        }
+
+        $user->save();
+
+
         $visitor = Visitor::find($visitor_id);
 
         if(empty($visitor))
@@ -70,16 +99,6 @@ class VisitorApi extends Controller
         $visitor->gender = $request->gender;
         $visitor->address = $request->address;
         $visitor->save();
-
-        $user = User::find($visitor_id);
-
-        $user->email = $request->email;
-        if(!empty($request->password))
-        {
-            $user->password = Hash::make($request->password);       
-        }
-
-        $user->save();
 
         DB::commit();
 

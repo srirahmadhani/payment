@@ -29,6 +29,11 @@ class Autentikasi extends Controller
                 if($cek_email->level == 1) // pegawai
                 {
                     $detail = Employee::find($cek_email->id);
+                    if($detail->id_position != "KS4")
+                    {
+                        return redirect()->route('login')->with('Status', "Email atau assword salah!");
+                    }
+
                     $name = $detail->employee_name;
                     $code = $detail->NIK;
                 }

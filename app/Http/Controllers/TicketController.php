@@ -11,11 +11,7 @@ use Auth;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $ticket = Ticket::all();
@@ -26,11 +22,6 @@ class TicketController extends Controller
         return view('ticket.index', compact('ticket','authposition','authname'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *s
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $authposition = session()->get('id_position');
@@ -44,12 +35,6 @@ class TicketController extends Controller
         return view ('ticket.create',compact('kode' ,'authposition','authname'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validasi = $request -> validate([
@@ -77,12 +62,7 @@ class TicketController extends Controller
        return redirect()->route('ticket.index')->with('Status', 'data tiket berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $authposition = session()->get('id_position');
@@ -95,12 +75,7 @@ class TicketController extends Controller
         return view ('ticket.show',compact('authposition','authname', 'ticket'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($tkt)
     {
         $authposition = session()->get('id_position');
@@ -113,13 +88,8 @@ class TicketController extends Controller
         return view ('/ticket.edit',compact('ticket','authposition','authname'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
+    
+     
     public function update(Request $request, $tkt)
     {
         $ticket = Ticket::find($tkt);
@@ -141,12 +111,7 @@ class TicketController extends Controller
        return redirect()->route('ticket.index')->with('Status', 'data tiket berhasil diedit!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
         $ticket=Ticket::where('ticket_id','=',$id)->delete();

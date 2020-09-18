@@ -22,7 +22,7 @@
 
             <div class="form-group">
                <label for="nama">ID</label>
-               <input type="text" class="form-control"  id="id" name="id" value="{{$kode}}" >
+               <input type="text" class="form-control"  id="id" name="id" value="{{$kode}}" readonly>
             </div>
             <div class="form-group">
                <label for="visitor">Pengunjung</label>
@@ -65,7 +65,7 @@
                               <tbody>
                                  @foreach($visitor as $dataVisitor)
                                  <tr class="pilih-visitor" data-visitor_id="{{$dataVisitor->visitor_id}}" data-visitor_name="{{ $dataVisitor->visitor_name }}">
-                                    <td>{{$dataVisitor->visitor_code}}</td>
+                                    <td>{{$dataVisitor->visitor_id}}</td>
                                     <td>{{$dataVisitor->visitor_name}}</td>
                                     <td>{{$dataVisitor->gender}}</td>
                                     <td>{{$dataVisitor->address}}</td>
@@ -90,7 +90,7 @@
             </div>
      
             <div class="form-group">
-               <label for="qty">Jumlah</label>
+               <label for="qty">Jumlah Tiket</label>
                <input type="number" class="form-control" id="qty" placeholder="Jumlah" name="qty"  
                   value="{{ old('qty') }}"required>
             </div>

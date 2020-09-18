@@ -34,13 +34,6 @@
          </div>
       </div>
 
-      
-      <div class="form-group">
-      <label for="id" class="col-md-2 control-label" >ID Pengunjung</label>
-      <div class="col-md-6">
-         <input type="text" class="form-control" name="id" 
-            value="{{ $visitor->visitor_code }}" readonly="">
-      </div>
       <div class="form-group">
       <label for="nama" class="col-md-2 control-label" >Nama Pengunjung</label>
       <div class="col-md-6">
@@ -73,9 +66,7 @@
             <input type="text" class="form-control" name="address" 
                value="{{ $visitor->register_date}}" readonly="">
          </div>
-         
       </div>
       
-         
       </div>
 @endsection

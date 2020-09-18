@@ -29,7 +29,7 @@
       <label for="jenis_kelamin" class="col-md-2 control-label" >Jenis Kelamin</label>
       <div class="col-md-6">
          <input type="text" class="form-control" name="id" 
-            value="{{ $employee->gender === 'L' ? 'Laki - Laki' : 'Perempuan'}}" readonly="">
+            value="{{ $employee->gender === 1 ? 'Laki - Laki' : 'Perempuan'}}" readonly="">
       </div>
       <div class="form-group">
       <label for="email" class="col-md-2 control-label" >Email</label>

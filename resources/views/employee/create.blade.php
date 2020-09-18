@@ -34,8 +34,8 @@
             <label for="gender">Jenis Kelamin</label>
             <select class="form-control" name="gender" required="">
                <option value="" disabled selected="">-Pilih-</option>
-               <option value="L">Laki-Laki</option>
-               <option value="P">Perempuan</option>
+               <option value="1">Laki-Laki</option>
+               <option value="2">Perempuan</option>
             </select>
          </div>
          

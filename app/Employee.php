@@ -9,11 +9,9 @@ class Employee extends Model
 
     protected $primaryKey = 'employee_id';
 
-    // protected $keyType = 'string';
-
     protected $table = 'employees';
 
-    protected $fillable = ['NIK', 'employee_name', 'gender', 'phone', 'address', 'id_position', 'employee_id'];
+    protected $fillable = ['employee_id','NIK', 'employee_name', 'gender', 'phone', 'address', 'id_position'];
 
     public function user()
     {

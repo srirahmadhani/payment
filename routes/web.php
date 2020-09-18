@@ -49,8 +49,6 @@ date_default_timezone_set("ASIA/JAKARTA");
 
 //Payment
 Route::resource('payment', 'PaymentController');
-// Route::get('/payment/{id}','PaymentController@show')->name('payment.show');
-
 
 
 

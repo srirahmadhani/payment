@@ -66,7 +66,7 @@
                   <td>{{$top->topup_date}}</td>
                   <td>{{$top->visitor->visitor_name}}</td>
                   <td>@currency($top->amount)</td>
-                  <td>{{$top->employee->NIK}}</td>
+                  <td>{{$top->employee->employee_name}}</td>
 
                </tr>
                @endforeach

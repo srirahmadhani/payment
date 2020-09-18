@@ -18,7 +18,7 @@
                         <center>
                             <br><br>
                             <h2>Kampung Sarosah</h2>
-                            <h5><b>Payakumbuh</b></h5>
+                            <h5><b>Lembah Harau</b></h5>
                             <span><span class="fa fa-envelope"></span> E-mail : admin@gmail.com,
                                 <span class="fa fa-phone"></span> phone :
                                 081122334455</span>

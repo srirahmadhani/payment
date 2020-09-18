@@ -15,10 +15,6 @@
       <form method="POST" action="{{route('visitor.store')}}" enctype="multipart/form-data">
          @csrf
          <div class="form-group">
-            <label for="nama">ID</label>
-            <input type="text" class="form-control"  id="id" name="id" value="{{$kode}}" readonly="readonly">
-         </div>
-         <div class="form-group">
             <label for="name">Nama</label>
             <input type="text" class="form-control" id="name" 
                placeholder="Masukkan Nama" name="name"  value="{{ old('name')}}" required >
@@ -27,8 +23,8 @@
             <label for="gender">Jenis Kelamin</label>
             <select class="form-control" name="gender" required="">
                <option value="" disabled selected="">-Pilih-</option>
-               <option value="L">Laki-Laki</option>
-               <option value="P">Perempuan</option>
+               <option value="1">Laki-Laki</option>
+               <option value="2">Perempuan</option>
             </select>
          </div>
          <div class="form-group">

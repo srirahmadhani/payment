@@ -18,11 +18,6 @@ class PagesController extends Controller
     }
 
 
-    // public function pengunjung()
-    // {
-    //     return view('pengunjung.index');
-    // }
-
     public function tiket()
     {
         return view('tiket.index');

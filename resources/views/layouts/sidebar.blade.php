@@ -10,6 +10,7 @@
    <!-- Divider -->
    <hr class="sidebar-divider my-0">
    <!-- Nav Item - Dashboard -->
+ 
    <li class="nav-item active">
       <a class="nav-link" href="{{ url('/home') }}">
       <i class="fas fa-fw fa-chart-line" ></i>
@@ -20,6 +21,9 @@
    <!-- Heading -->
    <div class="sidebar-heading">
    </div>
+
+
+
    <!-- Nav Item - Pages Collapse Menu -->
    @if(session()->get('id_position') == 'KS2')
    <li class="nav-item">
@@ -51,9 +55,10 @@
          </div>
       </div>
    </li>
-   @endif
+   
    <!-- Divider -->
    <hr class="sidebar-divider">
+   @endif
    <!-- Nav Item - Data Master -->
    @if(session()->get('id_position') == 'KS1' OR session()->get('id_position') == 'KS2')
    <li class="nav-item">

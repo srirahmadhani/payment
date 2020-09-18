@@ -17,7 +17,7 @@ class Visitor extends Model
     // protected $keyType = 'string';
 
     protected $fillable = [
-        'visitor_id', 'visitor_name', 'gender', 'address', 'visitor_code'
+        'visitor_id', 'visitor_name', 'gender', 'address'
     ];
 
     public function user()

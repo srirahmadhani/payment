@@ -13,11 +13,7 @@ use Auth;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index() 
     {
         
@@ -27,23 +23,10 @@ class PaymentController extends Controller
         $authname = session()->get('name');
 
         return view('payment.index', compact('payment', 'authposition','authname'));
-
-        // $payment = DB::table('payments')
-        //             ->join('visitors','payments.visitor_id','=','visitors.visitor_id')
-        //             ->join('tickets','payments.ticket_id','=','tickets.ticket_id')
-        //             ->select('payments.*','visitors.*','tickets.*')
-        //             ->get();
-        // return view('payment.index', compact('payment'));
-
        
        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $max = Payment::max('payment_id');
@@ -59,12 +42,7 @@ class PaymentController extends Controller
         return view ('payment.create',compact('kode','visitor', 'ticket', 'authposition','authname'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
        DB::beginTransaction();
@@ -102,12 +80,6 @@ class PaymentController extends Controller
     }
     
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $payment = DB::table('payments')
@@ -124,35 +96,8 @@ class PaymentController extends Controller
          return view ('payment.show',compact('payment', 'authposition','authname'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
+   
+   
     public function destroy($id)
     {
           $payment=Payment::where('payment_id','=',$id)->delete();

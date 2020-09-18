@@ -15,11 +15,7 @@ use Auth;
 
 class VisitorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $visitor = new Visitor();
@@ -35,30 +31,18 @@ class VisitorController extends Controller
         return view('visitor.index', compact('visitor_data', 'payment', 'topup', 'authposition', 'authname'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        $max = Visitor::max('visitor_code');
-        $no_urut = (int)substr($max, 9, 9) + 1;
-        $kode = "PG" . sprintf("%09s", $no_urut);
-
+       
         
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
 
-        return view('visitor.create', compact('kode', 'authposition', 'authname'));
+        return view('visitor.create', compact('authposition', 'authname'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -82,7 +66,6 @@ class VisitorController extends Controller
         ]);
 
         $visitor = Visitor::create([
-            'visitor_code' => $request->id,
             'visitor_name' => $request->name,
             'gender' => $request->gender, 'address' => $request->address,
             'visitor_id' => $id_user
@@ -94,12 +77,8 @@ class VisitorController extends Controller
             ->with('Status', 'data pengunjung berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Visitor  $visitor
-     * @return \Illuminate\Http\Response
-     */
+   
+   
     public function show($id)
     {
 
@@ -117,12 +96,7 @@ class VisitorController extends Controller
         return view('visitor.show', compact('visitor', 'authposition', 'authname'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Visitor  $visitor
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         $visitor = DB::table('visitors')
@@ -130,7 +104,7 @@ class VisitorController extends Controller
             ->select('visitors.*', 'users.*')
             ->where('visitor_id', '=', $id)
             ->first();
-        // $pengunjung=Pengunjung::where('id_pengunjung','=',$id)->first();
+        
         
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
@@ -138,13 +112,7 @@ class VisitorController extends Controller
         return view('/visitor.edit', compact('visitor', 'authposition', 'authname'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Visitor  $visitor
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
@@ -177,12 +145,7 @@ class VisitorController extends Controller
             ->with('Status', 'data pengunjung berhasil diedit!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Visitor  $visitor
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $user = User::where('id', '=', $id)->delete();
