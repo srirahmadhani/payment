@@ -36,9 +36,7 @@ class Payment extends Model
 
     public function reportPaymentsPerYear($year)
     {
-        return DB::select("SELECT monthname(times.date) AS bulan, IFNULL(payments_year.total, 0) AS total from times LEFT JOIN (SELECT MONTHNAME(payment_date) AS bulan, sum(total) AS total FROM payments WHERE year(payment_date) = ? group by MONTH(payment_date) ORDER BY payment_date ASC) payments_year 
-            ON monthname(date) = payments_year.bulan 
-            WHERE year(times.date) = ? GROUP BY month(times.date) ORDER BY times.date ASC", [$year, $year]);
+        return DB::select("SELECT monthname(times.date) AS bulan, IFNULL(payments_year.total, 0) AS total from times LEFT JOIN (SELECT MONTHNAME(payment_date) AS bulan, sum(total) AS total FROM payments WHERE year(payment_date) = ? group by MONTH(payment_date) ORDER BY payment_date ASC) payments_year ON monthname(date) = payments_year.bulan WHERE year(times.date) = ? GROUP BY month(times.date) ORDER BY times.date ASC", [$year, $year]);
     }
 
     public function reportPaymentsPerYearDonat($yeard)

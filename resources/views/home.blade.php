@@ -117,7 +117,7 @@
       <div class="card shadow mb-4">
          <!-- Card Header - Dropdown -->
          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Penjualan per kategori Tiket</h6>
             <div class="row">
                <div class="col-sm-12">
                   <select class="form-control" id="tahundonat">
@@ -149,14 +149,22 @@
 <script>
    $(document).ready(function () {
       var payments_year = <?=json_encode($payments_report)?>;
+      console.log(payments_year);
       var labels = [];
       var data = [];
       var banyak_data = payments_year.length;
+
+      // ubah format data baris dan kolom dari variabel payment_year agar sesuai dengan format sebaris pada
+      // chartks
       for(var x = 0;  x < banyak_data; x++)
       {
          labels.push(payments_year[x].bulan.substr(0, 3));
          data.push(payments_year[x].total);
       }
+
+      console.log(labels);
+      console.log(data);
+
    new Chart(document.getElementById("line-chart"), {
    type: 'line',
    data: {
@@ -168,11 +176,12 @@
                   fill: false
                   }
                ]
-   },options: {
-      legend: { display: false },
-      title: {
-      display: true,
-      text: 'Payment Tahun : <?=$year?>',
+      },
+      options: {
+         legend: { display: false },
+         title: {
+         display: true,
+         text: 'Payment Tahun : <?=$year?>',
       }
    }
    });
@@ -185,7 +194,8 @@
       var datad = [];
       var banyak_tiket = tiket_name.length;
       var warna = randomColor({
-         hue: 'blue',
+         luminosity: 'bright',
+         hue: 'random',
          count: tiket_name.length
       });
       for(var x = 0; x < banyak_tiket; x++) { 

@@ -57,7 +57,13 @@ class Autentikasi extends Controller
                 $request->session()->put("address", $address);
                 $request->session()->put("id_position", $id_position);
 
+                if($id_position == "KS3")
+                {
+                    return redirect()->route('topup.index')->with('Status', "Anda berhasil login!");
+                }
+
                 return redirect()->route('home')->with('Status', "Anda berhasil login!");
+
             }
             else
             {

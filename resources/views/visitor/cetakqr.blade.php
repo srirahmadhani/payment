@@ -5,53 +5,46 @@
     <title></title>
     <link href="{{ asset('/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <script src="{{asset('/js/qrcode.min.js')}}"></script>
+    <style>
+        table td, table td * {
+            vertical-align: top;
+        }
+    </style>
 </head>
 
-<body>
+<body style="border: 1px solid black; padding: 10px; margin: 10px;">
      <div class="container text-dark">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="row">
-                    <div class="col-md-2 mt-4">
-
-                    </div>
-                    <div class="col-md-8">
-                        <center>
-                            <br><br>
-                            <h2>Kampung Sarosah</h2>
-                            <h5><b>Payakumbuh</b></h5>
-                            <span><span class="fa fa-envelope"></span> E-mail : kampungsarosah@gmail.com,
-                                <span class="fa fa-phone"></span> phone :
-                                081122334455</span>
-                        </center>
-                    </div>
-                    <div class="col-md-2">
-
-                    </div>
                     <div class="col-12">
-                        <hr style="border-top:4px double black">
                         <br>
-
-
                         <table style="width: 100%;">
                             <tr>
-                                <td rowspan="3">
+                                <td rowspan="5">
                                     <div id="qrcode"></div>
                                     <script type="text/javascript">
                                     new QRCode(document.getElementById("qrcode"), {
                                         text:  "{{ $visitor->visitor_id }}",
-                                        width: 150,
-                                        height: 150,
+                                        width: 300,
+                                        height: 300,
                                        });
                                     </script>
                                 </td>
-                                <td style="text-align: left; width: 100px;">
-                                    Registrasi
-                                </td>
-                                <td style="width: 5px; ">:</td>
-                                <td style="text-align: left;">{{ $visitor->user->register_date}}</td>
                             </tr>
-                                                    <tr>
+                            <tr>
+                                <td colspan="4">
+                                    <center>
+                                        <br><br>
+                                        <h1>Kampung Sarosah</h1>
+                                        <h3><b>Lembah Harau</b></h3>
+                                        <span><span class="fa fa-envelope"></span> E-mail : kampungsarosah@gmail.com,
+                                            <span class="fa fa-phone"></span> phone :
+                                            081122334455</span>
+                                    </center>
+                                </td>
+                            </tr>
+                             <tr>
                                 <td style="text-align: left;">
                                     Nama
                                 </td>
@@ -66,6 +59,13 @@
                                 <td style="width: 5px; ">:</td>
                                 <td style="text-align: left;">{{ $user->email }}</td>
                             </tr>
+                            <tr>
+                                <td style="text-align: left; width: 100px;">
+                                    Registrasi
+                                </td>
+                                <td style="width: 5px; ">:</td>
+                                <td style="text-align: left;">{{ $visitor->user->register_date}}</td>
+                            </tr>
                         </table>
 
 
@@ -77,4 +77,4 @@
     </div>
 </body>
 
-</html>A
+</html>

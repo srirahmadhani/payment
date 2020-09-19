@@ -10,12 +10,17 @@
    <!-- Divider -->
    <hr class="sidebar-divider my-0">
    <!-- Nav Item - Dashboard -->
- 
+   
+   @if(session()->get('id_position') != 'KS3')
+
    <li class="nav-item active">
       <a class="nav-link" href="{{ url('/home') }}">
       <i class="fas fa-fw fa-chart-line" ></i>
       <span>Dashboard </span></a>
    </li>
+
+   @endif
+
    <!-- Divider -->
    <hr class="sidebar-divider">
    <!-- Heading -->
@@ -26,12 +31,12 @@
 
    <!-- Nav Item - Pages Collapse Menu -->
    @if(session()->get('id_position') == 'KS2')
-   <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_master" aria-expanded="true" aria-controls="collapseTwo">
          <i class="fas fa-fw fa-folder-open"></i>
          <span>Data Master</span>
          </a>
-         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+         <div id="menu_master" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                <a class="collapse-item" href="{{ url('/ticket') }}">Tiket</a>
                <a class="collapse-item" href="{{ url('/visitor') }}">Pengunjung</a>
@@ -40,40 +45,77 @@
             </div>
          </div>
       </li>
-   <hr class="sidebar-divider">
-   @endif
-   @if(session()->get('id_position') =='KS3' or session()->get('id_position') == 'KS2')
-<li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-      <i class="fas fa-fw fa-credit-card"></i>
-      <span>Transaksi</span>
-      </a>
-      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('/topup') }}">Top Up</a>
-            <a class="collapse-item" href="{{ url('/payment') }}">Payment</a>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_transaksi" aria-expanded="true" aria-controls="collapseTwo">
+         <i class="fas fa-fw fa-folder-open"></i>
+         <span>Data Transaksi</span>
+         </a>
+         <div id="menu_transaksi" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+               <a class="collapse-item" href="{{ url('/topup') }}">Top Up</a>
+               <a class="collapse-item" href="{{ url('/payment') }}">Payment</a>
+            </div>
          </div>
-      </div>
-   </li>
+      </li>
+      <hr class="sidebar-divider">
+         <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_laporan" aria-expanded="true" aria-controls="collapsePages">
+         <i class="fas fa-fw fa-table"></i>
+         <span>Laporan</span>
+         </a>
+         <div id="menu_laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('/report/topup')}}">Top Up</a>
+            <a class="collapse-item" href="{{url('/report/payment_report')}}">Payment</a>
+         </div>
+      </li>
+      <hr class="sidebar-divider">
+   @endif
+   @if(session()->get('id_position') =='KS3')
+      <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_master" aria-expanded="true" aria-controls="collapseTwo">
+         <i class="fas fa-fw fa-folder-open"></i>
+         <span>Data Master</span>
+         </a>
+         <div id="menu_master" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+               <a class="collapse-item" href="{{ url('/visitor') }}">Pengunjung</a>
+            </div>
+         </div>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_transaksi" aria-expanded="true" aria-controls="collapseTwo">
+         <i class="fas fa-fw fa-folder-open"></i>
+         <span>Data Transaksi</span>
+         </a>
+         <div id="menu_transaksi" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+               <a class="collapse-item" href="{{ url('/topup') }}">Top Up</a>
+               <a class="collapse-item" href="{{ url('/payment') }}">Payment</a>
+            </div>
+         </div>
+      </li>
    
    <!-- Divider -->
    <hr class="sidebar-divider">
    @endif
    <!-- Nav Item - Data Master -->
-   @if(session()->get('id_position') == 'KS1' OR session()->get('id_position') == 'KS2')
+   @if(session()->get('id_position') == 'KS1')
    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_laporan" aria-expanded="true" aria-controls="collapsePages">
       <i class="fas fa-fw fa-table"></i>
       <span>Laporan</span>
       </a>
-      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div id="menu_laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
          <a class="collapse-item" href="{{url('/report/topup')}}">Top Up</a>
          <a class="collapse-item" href="{{url('/report/payment_report')}}">Payment</a>
       </div>
    </li>
-   @endif
    <hr class="sidebar-divider">
+   @endif
    
    <!-- Nav Item Transaksi-->
   <!--  @if(session()->get('id_position') == 'KS1' or session()->get('id_position') == 'KS2')

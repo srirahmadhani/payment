@@ -20,7 +20,7 @@ class PaymentApi extends Controller
         $payment = Payment::all();
         if($id_visitor != null)
         {
-            $payment = Payment::where("visitor_id", $id_visitor)->first();
+            $payment = Payment::select("*")->where("visitor_id", $id_visitor)->join("tickets", "tickets.ticket_id", "=", "payments.ticket_id")->get();
         }
 
         return response()->json(ResponseOk($payment));

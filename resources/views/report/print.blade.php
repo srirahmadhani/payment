@@ -6,6 +6,7 @@
     <link href="{{ asset('bootstrap.min.css')}}" rel="stylesheet">
 </head>
 
+
 <body>
     <div class="container text-dark">
         <div class="row">
