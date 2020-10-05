@@ -41,7 +41,6 @@ class TicketController extends Controller
             'name'=> 'required',
             'price'=> 'required',
             'image'=> 'required',
-            'info'=> 'required',
        ]);
 
         if ($request->hasFile('image')){
@@ -56,7 +55,6 @@ class TicketController extends Controller
             'ticket_name' => $request->name,
             'price'  => $request->price,
             'image' => $newName,
-            'info' => $request->info,
        ]);
 
        return redirect()->route('ticket.index')->with('Status', 'data tiket berhasil ditambahkan!');
@@ -104,7 +102,6 @@ class TicketController extends Controller
         $ticket->ticket_name = $request->name;
         $ticket->price = $request->price;
         $ticket->image = $newName;
-        $ticket->info = $request->info;
         $ticket->save();
 
 

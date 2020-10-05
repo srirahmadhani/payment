@@ -51,7 +51,7 @@
                             <th width="75px">
                                 <center>No</center>
                             </th>
-                            <th>ID</th>
+                          <!--   <th>ID</th> -->
                             <th>Tanggal</th>
                             <th>Pengunjung</th>
                             <th>Tiket</th>
@@ -65,7 +65,7 @@
                             <th scope="row">
                                 <center>{{$loop->iteration}}</center>
                             </th>
-                            <td>{{$pay->payment_id}}</td>
+                           <!--  <td>{{$pay->payment_id}}</td> -->
                             <td>{{$pay->payment_date}}</td>
                             <td>{{$pay->visitor->visitor_name}}</td>
                             <td>{{$pay->ticket->ticket_name}}</td>

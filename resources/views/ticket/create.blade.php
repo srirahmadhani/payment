@@ -34,12 +34,8 @@
             placeholder="Masukkan Gambar" name="image"  value="{{ old('image') }}" 
             accept="image/*" required>   
       </div>
-      <div class="form-group">
-         <label for="info">Keterangan</label>
-         <input type="info" class="form-control" id="info"
-            placeholder="Masukkan Keterangan" name="info" 
-            value="{{ old('info') }}" required>
-      </div>
+      
+      
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
 </div>

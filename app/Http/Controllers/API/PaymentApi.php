@@ -17,10 +17,13 @@ class PaymentApi extends Controller
 {
  	public function index(Request $request, $id_visitor = null)
    {
-        $payment = Payment::all();
         if($id_visitor != null)
         {
             $payment = Payment::select("*")->where("visitor_id", $id_visitor)->join("tickets", "tickets.ticket_id", "=", "payments.ticket_id")->get();
+        }
+        else
+        {
+            $payment = Payment::select("*")->join("tickets", "tickets.ticket_id", "=", "payments.ticket_id")->get();
         }
 
         return response()->json(ResponseOk($payment));

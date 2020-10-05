@@ -37,11 +37,7 @@
          placeholder="Masukkan Gambar" name="image"  value="{{ old('image') }}" accept="image/*" required>
 
    </div>
-   <div class="form-group">
-      <label for="info"> Keterangan</label>
-      <input type="text" class="form-control" id="info" name="info"  
-         value="{{$ticket->info}}" required>
-   </div>
+   
    <button type="submit" class="btn btn-primary">Submit</button>
   
 </form>

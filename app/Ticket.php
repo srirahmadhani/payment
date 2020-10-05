@@ -13,7 +13,7 @@ class Ticket extends Model
     protected $keyType= 'string';
 
 	protected $fillable = [
-        'ticket_id', 'ticket_name', 'price', 'image', 'info',
+        'ticket_id', 'ticket_name', 'price', 'image'
     ];
 
     public $timestamps = false;

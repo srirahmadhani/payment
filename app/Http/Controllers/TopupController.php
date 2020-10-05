@@ -70,7 +70,7 @@ class TopupController extends Controller
         ]);
 
         DB::commit();
-        return redirect()->route('topup.index')->with('Status', 'Data Pegawai berhasil ditambahkan!');
+        return redirect()->route('topup.index')->with('Status', 'Data Top Up berhasil ditambahkan!');
     }
 
     

@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('auth.login');
 })->name('login');
+
 Route::post('/login', 'Autentikasi@cekLogin')->name('cek_login');
 
 // Auth::routes();
@@ -70,3 +71,6 @@ Route::get('/report/topup', 'ReportController@topupindex')->name('report.topup_r
 Route::get('/report/payment_report', 'ReportController@paymentindex')->name('report.payment_report');
 
 Route::get('/visitor/cetak/qr/{id}', 'VisitorController@cetakqrvisitor')->name('visitor.cetakqr');
+
+
+Route::get('/akun/aktivasi/{token}', 'VisitorController@aktivasiakun')->name('akun.aktivasi');

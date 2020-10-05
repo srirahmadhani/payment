@@ -8,6 +8,7 @@ use App\Payment;
 use App\Topup;
 use App\Employee;
 use App\Position;
+use App\Helper\JwtHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -163,5 +164,26 @@ class VisitorController extends Controller
         $data['visitor'] = Visitor::find($id);
         $data['user'] = User::find($id);
         return view("visitor.cetakqr", $data);
+    }
+
+    public function aktivasiakun(Request $request, $token)
+    {
+        $data = JwtHelper::BacaToken($token);
+        if(!$data['error'])
+        {   
+            // cek apakah tanggal aktivasi ditoken sudah kadaluarsa atau tidak
+            if(strtotime($data['data']->batas_aktivasi) >= strtotime(date("Y-m-d H:i:s")))
+            {
+                // aktifkan akun
+                $user = User::find($data['data']->id_user);
+                $user->status = 1;
+                $user->save();
+            }
+            else
+            {
+                $data['error'] = true;
+            }
+        }
+        return view("visitor.aktivasi_akun", $data);
     }
 }

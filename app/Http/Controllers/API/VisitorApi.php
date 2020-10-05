@@ -10,6 +10,8 @@ use App\Payment;
 use App\Topup;
 use App\Employee;
 use App\Position;
+use App\Helper\MailHelper;
+use App\Helper\JwtHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Auth;
@@ -52,7 +54,8 @@ class VisitorApi extends Controller
             'email' => $request->email,
             'password' => Hash::make($request['password']),
             'level' => 2,
-            'register_date' => date("Y-m-d H:i:s")
+            'register_date' => date("Y-m-d H:i:s"),
+            'status' => 0
         ])->id;
 
 
@@ -63,10 +66,26 @@ class VisitorApi extends Controller
             'visitor_id' => $id_user
         ]);
 
-        DB::commit();
-        return response()->json(ResponseOk("Registrasi berhasil"));
+        // Kirim email
+        $data_token = array(
+            "batas_aktivasi" => date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s"). ' + 3 hours')),
+            "id_user" => $id_user
+        );
 
-         
+        $token = JwtHelper::BuatToken($data_token);
+        $nama_pengirim = "Kampung Sarosah";
+        $from = "noreply@kampungsarosah.com";
+        $to = $request->email;
+        $subject = "Aktivasi Akun Kampung Sarosah";
+        $message = "
+            Silahkan klik link dibawah untuk aktivasi akun : \n
+            ".url('akun/aktivasi/'.$token)." \n
+            link diatas hanya berlaku 3 jam sejak email ini dikirim.";
+
+        MailHelper::KirimEmail($nama_pengirim, $from, $to, $subject, $message);
+
+        DB::commit();
+        return response()->json(ResponseOk("Registrasi berhasil. Silahkan cek email untuk melakukan aktivasi akun Anda. "));
     }
 
 
