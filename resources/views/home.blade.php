@@ -11,12 +11,12 @@
 <!-- Content Row -->
 <div class="row">
    <!-- Earnings (Monthly) Card Example -->
-   <div class="col-xl-3 col-md-6 mb-4">
+   <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-primary shadow h-100 py-2">
          <div class="card-body">
             <div class="row no-gutters align-items-center">
                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Payment</div>
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Pendapatan</div>
                   <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ $total_payment }}</div>
                </div>
                <div class="col-auto">
@@ -27,7 +27,7 @@
       </div>
    </div>
    <!-- Earnings (Monthly) Card Example -->
-   <div class="col-xl-3 col-md-6 mb-4">
+   <!-- <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
          <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -42,16 +42,16 @@
             </div>
          </div>
       </div>
-   </div>
+   </div> -->
    <!-- Earnings (Monthly) Card Example -->
-   <div class="col-xl-3 col-md-6 mb-4">
+   <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-info shadow h-100 py-2">
          <div class="card-body">
             <div class="row no-gutters align-items-center">
                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1">jumlah tiket</div>
+                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Wahana</div>
                   <div class="row no-gutters align-items-center">
-                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $jml_tiket }} Tiket</div>
+                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $jml_tiket }} Wahana</div>
                   </div>
                </div>
                <div class="col-auto">
@@ -62,7 +62,7 @@
       </div>
    </div>
    <!-- Pending Requests Card Example -->
-   <div class="col-xl-3 col-md-6 mb-4">
+   <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
          <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -102,6 +102,7 @@
                      document.getElementById("tahun").addEventListener("change", function(){
                         window.location.href = "{{ url('home') }}?year=" + this.value;
                      });
+
                   </script>
                </div>
             </div>
@@ -117,10 +118,11 @@
       <div class="card shadow mb-4">
          <!-- Card Header - Dropdown -->
          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Penjualan per kategori Tiket</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Penjualan per Kategori Tiket</h6>
             <div class="row">
                <div class="col-sm-12">
                   <select class="form-control" id="tahundonat">
+
                      <option value="">-- Pilih Tahun ---</option>
                      @foreach($paymenttahun as $datatahun)
                      <option value="{{ $datatahun->payment_date }}">
@@ -140,7 +142,20 @@
          <!-- Card Body -->
          <div class="card-body">
             <canvas id="doughnut-chart" width="800" height="750"></canvas>
-         </div>
+            <br><b>Keterangan : </b> </br>
+            <br>   <b>WS01</b> : Tiket Masuk Kampung Sarosah</br>
+            <br>   <b>WS02</b> : Tiket Kampung Eropa</br>
+            <br>   <b>WS03</b> : Tiket Flying Fox</br>
+            <br>   <b>WS04</b> : Tiket Sepeda Gantung</br>
+            <br>   <b>WS05</b> : Tiket Tag Archery Dewasa</br>
+            <br>   <b>WS06</b> : Tiket Tag Archery Anak</br>
+            <br>   <b>WS07</b> : Tiket Kampung Korea-Jepang</br>
+            <br>   <b>WS08</b> : Tiket Sampan Kecil</br>
+            <br>   <b>WS09</b> : Tiket Sampan Besar</br>
+            <br>   <b>WS10</b> : Tiket Terusan</br>
+            <br>   <b>WS11</b> : Tiket Sepeda Air</br>
+
+    </div>
       </div>
    </div>
 </div>
@@ -181,12 +196,13 @@
          legend: { display: false },
          title: {
          display: true,
-         text: 'Payment Tahun : <?=$year?>',
+         text: 'Pendapatan Tahun : <?=$year?>',
       }
    }
    });
    });
 </script>
+
 <script>
    $(document).ready(function () {
       var tiket_name = <?=json_encode($tiket_report)?>;

@@ -59,6 +59,7 @@
                                        Jenis Kelamin
                                     </th>
                                     <th>Alamat</th>
+                                    <th>Email</th>
                                     <th>Saldo</th>
                                  </tr>
                               </thead>
@@ -67,8 +68,13 @@
                                  <tr class="pilih-visitor" data-visitor_id="{{$dataVisitor->visitor_id}}" data-visitor_name="{{ $dataVisitor->visitor_name }}">
                                     <td>{{$dataVisitor->visitor_id}}</td>
                                     <td>{{$dataVisitor->visitor_name}}</td>
-                                    <td>{{$dataVisitor->gender}}</td>
+                                    <td>@if($dataVisitor->gender == 1)
+                                       Laki-Laki
+                                       @else
+                                      Perempuan
+                                       @endif</td>
                                     <td>{{$dataVisitor->address}}</td>
+                                    <td>{{$dataVisitor->user->email}}</td>
                                     <td>{{$dataVisitor->saldo}}</td>
                                  </tr>
                                  @endforeach

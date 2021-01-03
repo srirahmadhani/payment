@@ -34,7 +34,7 @@
                   <th>Tiket</th>
                   <th>Jumlah</th>
                   <th>Total</th>
-                  <th>Pegawai</th>
+                  <th>Petugas Loket</th>
                   <th>Aksi</th>
                </tr>
             </thead>

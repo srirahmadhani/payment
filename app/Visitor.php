@@ -35,12 +35,6 @@ class Visitor extends Model
         return $this->hasMany(Topup::class, 'visitor_id', 'visitor_id');
     }
 
-    public function getVisitorWithSaldo()
-    {
-        return DB::select("SELECT visit.*, users.* 
-                FROM `visitors` visit 
-                JOIN users ON visit.visitor_id = users.id");
-    }
 
     public function getVisitorSaldoTotal()
     {

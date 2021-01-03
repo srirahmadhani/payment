@@ -56,7 +56,12 @@
                                 data-visitor_name="{{ $dataVisitor->visitor_name }}">
                                  <td>{{$dataVisitor->visitor_id}}</td>
                                  <td>{{$dataVisitor->visitor_name}}</td>
-                                 <td>{{$dataVisitor->gender}}</td>
+                                 <td>
+                                  @if($dataVisitor->gender == 1)
+                                       Laki-Laki
+                                       @else
+                                       Perempuan
+                                       @endif</td>
                                  <td>{{$dataVisitor->user->email}}</td>
                                  <td>{{$dataVisitor->address}}</td>
                               </tr>

@@ -21,8 +21,8 @@
 
          <div class="form-group">
             <label for="id">NIK</label>
-            <input type="text" class="form-control" value="{{$employee->NIK}}" readonly>
-         </div>
+            <input type="text" name="NIK" class="form-control" value="{{$employee->NIK}}">
+         </div> 
          <div class="form-group">
             <label for="nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" 

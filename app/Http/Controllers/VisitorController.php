@@ -19,17 +19,12 @@ class VisitorController extends Controller
     
     public function index()
     {
-        $visitor = new Visitor();
-        $visitor_data = $visitor->getVisitorWithSaldo();
-
-        $payment = Payment::all();
-        $topup = Topup::all();
-
-        
+       
+        $visitor = Visitor::all();
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
 
-        return view('visitor.index', compact('visitor_data', 'payment', 'topup', 'authposition', 'authname'));
+        return view('visitor.index', compact('visitor', 'authposition', 'authname'));
     }
 
     

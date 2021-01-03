@@ -104,7 +104,7 @@ class EmployeeController extends Controller
         DB::beginTransaction();
 
         $employee = Employee::find($id);
-
+        $employee->NIK= $request->NIK;
         $employee->employee_name = $request->nama;
         $employee->gender = $request->gender;
         $employee->phone = $request->hp;

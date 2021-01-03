@@ -55,7 +55,7 @@
                   <th>Tanggal</th>
                   <th>Pengunjung</th>
                   <th>Jumlah</th>
-                  <th>Pegawai</th>
+                  <th>Kasir</th>
                </tr>
             </thead>
             <tbody class="hasil">

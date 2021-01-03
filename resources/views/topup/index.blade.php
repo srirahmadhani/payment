@@ -32,7 +32,7 @@
                   <th>Tanggal</th>
                   <th>Pengunjung</th>
                   <th>Jumlah</th>
-                 <!--  <th>Kasir</th> -->
+                  <th>Kasir</th>
                   <th>Aksi</th>
                </tr>
             </thead>
@@ -44,7 +44,7 @@
                   <td>{{$top->topup_date}}</td>
                   <td>{{$top->visitor->visitor_name}}</td>
                   <td>@currency($top->amount)</td>
-                 <!--  <td>{{$top->employee->employee_name}}</td> -->
+                  <td>{{$top->employee->employee_name}}</td>
                   <td>
                      <a href="{{ route('topup.print', ['id'=>$top->topup_id]) }}"
                         class="btn btn-primary btn-sm d-inline" target="_blank"><i class="fas fa-eye"></i> </a>

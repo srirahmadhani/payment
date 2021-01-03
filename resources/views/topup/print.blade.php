@@ -15,13 +15,13 @@
 
                     </div>
                     <div class="col-md-8">
-                        <center>
+                         <center>
                             <br><br>
                             <h2>Kampung Sarosah</h2>
-                            <h5><b>Payakumbuh</b></h5>
-                            <span><span class="fa fa-envelope"></span> E-mail : admin@gmail.com,
-                                <span class="fa fa-phone"></span> phone :
-                                081122334455</span>
+                            <h5><b>Jorong Lubuak Limpato, Kenagarian Tarantang, Kecamatan Harau</b></h5>
+                            <span><span class="fa fa-envelope"></span> Lembah Harau
+                                <span class="fa fa-phone"></span> HP.
+                                081360813344</span>
                         </center>
                     </div>
                     <div class="col-md-2">
@@ -72,4 +72,4 @@
 	</div>
 </body>
 
-</html>A
+</html>

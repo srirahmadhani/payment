@@ -32,6 +32,7 @@
             <thead>
                <tr>
                   <th scope="col">#</th>
+                 <!--  <th>ID</th> -->
                   <th scope="col">NIK</th>
                   <th>Nama</th>
                   <th>Email</th>
@@ -44,6 +45,7 @@
                @foreach ($employee as $peg)
                <tr>
                   <th scope="row">{{$loop->iteration}}</th>
+                 <!--  <td>{{$peg->employee_id}}</td> -->
                   <td>{{$peg->NIK}}</td>
                   <td>{{$peg->employee_name}}</td>
                   <td>{{$peg->user->email}}</td>

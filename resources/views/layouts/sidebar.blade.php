@@ -28,7 +28,6 @@
    </div>
 
 
-
    <!-- Nav Item - Pages Collapse Menu -->
    @if(session()->get('id_position') == 'KS2')
       <li class="nav-item">
@@ -38,10 +37,26 @@
          </a>
          <div id="menu_master" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-               <a class="collapse-item" href="{{ url('/ticket') }}">Tiket</a>
+               <a class="collapse-item" href="{{ url('/ticket') }}">Wahana</a>
                <a class="collapse-item" href="{{ url('/visitor') }}">Pengunjung</a>
                <a class="collapse-item" href="{{ url('/employee') }}">Pegawai</a>
                <a class="collapse-item" href="{{ url('/position') }}">Jabatan</a>  
+            </div>
+         </div>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_wahana" aria-expanded="true" aria-controls="collapseTwo">
+         <i class="fas fa-fw fa-folder-open"></i>
+         <span>Pengelolaan Wahana</span>
+         </a>
+         <div id="menu_wahana" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+               <a class="collapse-item" href="{{ url('/ticket') }}">Wahana</a>
+               <a class="collapse-item" href="{{ url('/visitor') }}">Jadwal Petugas Wahana</a>
+               <a class="collapse-item" href="{{ url('/employee') }}">Jadwal petugas Operator</a>
+                <a class="collapse-item" href="{{ url('/ticket') }}">Peralatan Wahana</a>
+               <a class="collapse-item" href="{{ url('/ticket') }}">Riwayat Perbaikan</a>
             </div>
          </div>
       </li>
@@ -66,8 +81,10 @@
          </a>
          <div id="menu_laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('/report/topup')}}">Top Up</a>
-            <a class="collapse-item" href="{{url('/report/payment_report')}}">Payment</a>
+            <a class="collapse-item" href="{{url('/report/topup')}}">Laporan Top Up</a>
+            <a class="collapse-item" href="{{url('/report/payment_report')}}">Laporan Payment</a>
+            <a class="collapse-item" href="{{url('/report/payment_report')}}">Laporan Wahana</a>
+
          </div>
       </li>
       <hr class="sidebar-divider">
@@ -97,6 +114,19 @@
             </div>
          </div>
       </li>
+      <hr class="sidebar-divider">
+         <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_laporan" aria-expanded="true" aria-controls="collapsePages">
+         <i class="fas fa-fw fa-table"></i>
+         <span>Laporan</span>
+         </a>
+         <div id="menu_laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('/report/topup')}}">Top Up</a>
+            <a class="collapse-item" href="{{url('/report/payment_report')}}">Payment</a>
+         </div>
+      </li>
+      
    
    <!-- Divider -->
    <hr class="sidebar-divider">

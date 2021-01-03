@@ -39,7 +39,7 @@
                </tr>
             </thead>
             <tbody>
-               @foreach ($visitor_data as $vst)
+               @foreach ($visitor as $vst)
                <tr>
                   <th scope="row">{{$loop->iteration}}</th>
                   <td>{{$vst->visitor_name}}</td>
@@ -51,10 +51,10 @@
                      @endif
                   </td>
                   <td>{{$vst->address}}</td>
-                  <td>{{$vst->email}}</td>
+                  <td>{{$vst->user->email}}</td>
                   <td>@currency($vst->saldo)</td>
                   <td>
-                     @if($vst->status == 1)
+                     @if($vst->user->status == 1)
                      Aktif
                      @else
                      Tidak Aktif

@@ -21,9 +21,11 @@ class ReportController extends Controller
         if ($request->type == 'search') {
             $topup = Topup::whereBetween(DB::raw('DATE(topup_date)'), [$request->date_start, $request->date_end])->get();
             return view('report.topup_report', compact('topup', 'authposition', 'authname'));
+
         } elseif ($request->type == 'print') {
             $topup = Topup::whereBetween(DB::raw('DATE(topup_date)'), [$request->date_start, $request->date_end])->get();
             $html_report = view('report.print', compact('topup', 'authposition', 'authname'));
+            
             // instantiate and use the dompdf class
             $dompdf = new Dompdf();
             $dompdf->loadHtml($html_report);
@@ -44,7 +46,7 @@ class ReportController extends Controller
         
     }
 
-    public function paymentindex(Request $request)
+ public function paymentindex(Request $request)
     {
         $html_report = "";
 
@@ -53,11 +55,12 @@ class ReportController extends Controller
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
 
-         if ($request->type == 'search') {
+        if ($request->type == 'search') {
             $payment = Payment::whereBetween(DB::raw('DATE(payment_date)'), [$request->date_start, $request->date_end])->get();
             return view('report.payment_report', compact('payment', 'authposition', 'authname'));
+            
         } elseif ($request->type == 'print') {
-            $payment = Payment::whereBetween(DB::raw('DATE(payment_date)'), [$request->date_start, $request->date_end])->get();
+            $payment = DB::table('payments')->leftJoin('tickets', 'tickets.ticket_id', '=', 'payments.ticket_id')->select('payments.ticket_id', 'tickets.ticket_name', DB::raw('SUM(payments.qty) as qty'), DB::raw('SUM(payments.total) as total'))->whereBetween(DB::raw('DATE(payments.payment_date)'), [$request->date_start, $request->date_end])->groupBy('payments.ticket_id')->get();
             $html_report = view('report.payment_print', compact('payment', 'authposition', 'authname'))->render();
             $dompdf = new Dompdf();
             $dompdf->loadHtml($html_report);
@@ -75,9 +78,5 @@ class ReportController extends Controller
 
             return view('report.payment_report', compact('payment', 'authposition', 'authname'));
         }
-
-        
-        
-}
-
-}
+    }
+    }

@@ -18,10 +18,10 @@
                         <center>
                             <br><br>
                             <h2>Kampung Sarosah</h2>
-                            <h5><b>Lembah Harau</b></h5>
-                            <span><span class="fa fa-envelope"></span> E-mail : admin@gmail.com,
-                                <span class="fa fa-phone"></span> phone :
-                                081122334455</span>
+                            <h5><b>Jorong Lubuak Limpato, Kenagarian Tarantang, Kecamatan Harau</b></h5>
+                            <span><span class="fa fa-envelope"></span> Lembah Harau
+                                <span class="fa fa-phone"></span> HP.
+                                081360813344</span>
                         </center>
                     </div>
                     <div class="col-md-2">
@@ -51,29 +51,35 @@
                             <th width="75px">
                                 <center>No</center>
                             </th>
-                          <!--   <th>ID</th> -->
-                            <th>Tanggal</th>
-                            <th>Pengunjung</th>
                             <th>Tiket</th>
                             <th>Qty</th>
                             <th>Total Pembayaran</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $totalkeseluruhan = 0;
+                        @endphp
                         @foreach ($payment as $pay)
                         <tr>
                             <th scope="row">
                                 <center>{{$loop->iteration}}</center>
                             </th>
-                           <!--  <td>{{$pay->payment_id}}</td> -->
-                            <td>{{$pay->payment_date}}</td>
-                            <td>{{$pay->visitor->visitor_name}}</td>
-                            <td>{{$pay->ticket->ticket_name}}</td>
+                            <td>{{$pay->ticket_name}}</td>
                             <td>{{$pay->qty}}</td>
                             <td>@currency($pay->total)</td>
                         </tr>
+                        @php
+                        $totalkeseluruhan=$totalkeseluruhan+$pay->total;
+                        @endphp
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total</td>
+                            <td>@currency($totalkeseluruhan)</td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div class="row">
                     <div class="col-md-4 offset-8 mt-5">
