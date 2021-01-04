@@ -11,11 +11,11 @@ use App\Position;
 
 class TicketApi extends Controller
 {
-    public function index(Request $request, $ticket_id = null)
+    public function index(Request $request, $wahana_id = null)
     {
-    	if($ticket_id != null)
+    	if($wahana_id != null)
     	{
-	        return response()->json(ResponseOk(Ticket::where("ticket_id", $ticket_id)->get()));
+	        return response()->json(ResponseOk(Ticket::where("wahana_id", $wahana_id)->get()));
     	}
         return response()->json(ResponseOk(Ticket::all()));
     }

@@ -37,7 +37,7 @@ class TopupApi extends Controller
             'topup_date' => date(now()),
             'amount' => $request->amount,
             'id_visitor' => $request->id_visitor,
-            'employee_id' => $request->employee_id
+            'employee_nik' => $request->employee_nik
         ]);
 
         DB::commit();

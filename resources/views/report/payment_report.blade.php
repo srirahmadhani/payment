@@ -14,7 +14,7 @@
          <link href="{{asset('/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
             <div class="text-left mt-3">
-            <form action="{{ route('report.payment_report')}}" method="GET">
+            <form action="{{ route('report.transaction_report')}}" method="GET">
                <div class="row">
                   <div class="col-md-2">
                      <input type="date" name="date_start" value="{{ app('request')->input('date_start') }}"
@@ -60,13 +60,13 @@
                </tr>
             </thead>
             <tbody>
-               @foreach ($payment as $pay)
+               @foreach ($transaction as $pay)
                <tr>
                   <th scope="row">{{$loop->iteration}}</th>
-                  <td>{{$pay->payment_id}}</td>
-                  <td>{{$pay->payment_date}}</td>
+                  <td>{{$pay->transaction_id}}</td>
+                  <td>{{$pay->transaction_date}}</td>
                   <td>{{$pay->visitor->visitor_name}}</td>
-                  <td>{{$pay->ticket->ticket_name}}</td>
+                  <td>{{$pay->wahana->wahana_name}}</td>
                   <td>{{$pay->qty}}</td>
                   <td>@currency($pay->total)</td>
                </tr>

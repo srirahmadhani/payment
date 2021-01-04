@@ -60,12 +60,12 @@
                         @php
                         $totalkeseluruhan = 0;
                         @endphp
-                        @foreach ($payment as $pay)
+                        @foreach ($transaction as $pay)
                         <tr>
                             <th scope="row">
                                 <center>{{$loop->iteration}}</center>
                             </th>
-                            <td>{{$pay->ticket_name}}</td>
+                            <td>{{$pay->wahana_name}}</td>
                             <td>{{$pay->qty}}</td>
                             <td>@currency($pay->total)</td>
                         </tr>

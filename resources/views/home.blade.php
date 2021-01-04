@@ -17,7 +17,7 @@
             <div class="row no-gutters align-items-center">
                <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Pendapatan</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ $total_payment }}</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{ $total_transaction }}</div>
                </div>
                <div class="col-auto">
                   <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -91,9 +91,9 @@
                <div class="col-sm-12">
                   <select class="form-control" id="tahun">
                      <option value="">-- Pilih Tahun ---</option>
-                     @foreach($paymenttahun as $datatahun)
-                     <option value="{{ $datatahun->payment_date }}">
-                        {{ $datatahun->payment_date }}</option>
+                     @foreach($transactiontahun as $datatahun)
+                     <option value="{{ $datatahun->transaction_date }}">
+                        {{ $datatahun->transaction_date }}</option>
                      @endforeach
                   </select>
                   <script>
@@ -124,9 +124,9 @@
                   <select class="form-control" id="tahundonat">
 
                      <option value="">-- Pilih Tahun ---</option>
-                     @foreach($paymenttahun as $datatahun)
-                     <option value="{{ $datatahun->payment_date }}">
-                        {{ $datatahun->payment_date }}</option>
+                     @foreach($transactiontahun as $datatahun)
+                     <option value="{{ $datatahun->transaction_date }}">
+                        {{ $datatahun->transaction_date }}</option>
                      @endforeach
                   </select>
                   <script>
@@ -163,18 +163,18 @@
 
 <script>
    $(document).ready(function () {
-      var payments_year = <?=json_encode($payments_report)?>;
-      console.log(payments_year);
+      var transactions_year = <?=json_encode($transactions_report)?>;
+      console.log(transactions_year);
       var labels = [];
       var data = [];
-      var banyak_data = payments_year.length;
+      var banyak_data = transactions_year.length;
 
-      // ubah format data baris dan kolom dari variabel payment_year agar sesuai dengan format sebaris pada
+      // ubah format data baris dan kolom dari variabel transaction_year agar sesuai dengan format sebaris pada
       // chartks
       for(var x = 0;  x < banyak_data; x++)
       {
-         labels.push(payments_year[x].bulan.substr(0, 3));
-         data.push(payments_year[x].total);
+         labels.push(transactions_year[x].bulan.substr(0, 3));
+         data.push(transactions_year[x].total);
       }
 
       console.log(labels);
@@ -215,7 +215,7 @@
          count: tiket_name.length
       });
       for(var x = 0; x < banyak_tiket; x++) { 
-         labeld.push(tiket_name[x].ticket_id);
+         labeld.push(tiket_name[x].wahana_id);
          datad.push(tiket_name[x].total); }
       new Chart(document.getElementById("doughnut-chart"), {
       type: 'doughnut',

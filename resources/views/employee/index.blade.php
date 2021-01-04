@@ -45,7 +45,7 @@
                @foreach ($employee as $peg)
                <tr>
                   <th scope="row">{{$loop->iteration}}</th>
-                 <!--  <td>{{$peg->employee_id}}</td> -->
+                 <!--  <td>{{$peg->employee_nik}}</td> -->
                   <td>{{$peg->NIK}}</td>
                   <td>{{$peg->employee_name}}</td>
                   <td>{{$peg->user->email}}</td>
@@ -58,11 +58,11 @@
                      @endif
                   </td>
                   <td>
-                     <a href="{{route('employee.show',$peg->employee_id)}}"
+                     <a href="{{route('employee.show',$peg->employee_nik)}}"
                         class="btn btn-primary btn-sm d-inline"><i class="fas fa-eye"></i> </a>  
-                     <a href="{{route('employee.edit',$peg->employee_id)}}" 
+                     <a href="{{route('employee.edit',$peg->employee_nik)}}" 
                         class="btn btn-success btn-sm d-inline"><i class="fas fa-edit"></i> </a>
-                     <form class="d-inline" action="{{ route('employee.destroy',$peg->employee_id) }}" 
+                     <form class="d-inline" action="{{ route('employee.destroy',$peg->employee_nik) }}" 
                         method="post">
                         @csrf
                         @method('delete')

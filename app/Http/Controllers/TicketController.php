@@ -14,12 +14,12 @@ class TicketController extends Controller
     
     public function index()
     {
-        $ticket = Ticket::all();
+        $wahana = Ticket::all();
 
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
 
-        return view('ticket.index', compact('ticket','authposition','authname'));
+        return view('wahana.index', compact('wahana','authposition','authname'));
     }
 
     public function create()
@@ -27,12 +27,12 @@ class TicketController extends Controller
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
 
-        $max = Ticket::max('ticket_id');
+        $max = Ticket::max('wahana_id');
         $no_urut = (int) substr($max, 2, 2) + 1;
         $kode = "WS" .sprintf("%02s", $no_urut);
 
         
-        return view ('ticket.create',compact('kode' ,'authposition','authname'));
+        return view ('wahana.create',compact('kode' ,'authposition','authname'));
     }
 
     public function store(Request $request)
@@ -50,14 +50,14 @@ class TicketController extends Controller
             $file->move('image', $newName);
         }
 
-       $ticket= Ticket::create([
-            'ticket_id' => $request->id,
-            'ticket_name' => $request->name,
+       $wahana= Ticket::create([
+            'wahana_id' => $request->id,
+            'wahana_name' => $request->name,
             'price'  => $request->price,
             'image' => $newName,
        ]);
 
-       return redirect()->route('ticket.index')->with('Status', 'data tiket berhasil ditambahkan!');
+       return redirect()->route('wahana.index')->with('Status', 'data tiket berhasil ditambahkan!');
     }
 
     
@@ -67,10 +67,10 @@ class TicketController extends Controller
         $authname = session()->get('name');
 
 
-        $ticket = Ticket::find($id);
+        $wahana = Ticket::find($id);
 
         
-        return view ('ticket.show',compact('authposition','authname', 'ticket'));
+        return view ('wahana.show',compact('authposition','authname', 'wahana'));
     }
 
    
@@ -80,17 +80,17 @@ class TicketController extends Controller
         $authname = session()->get('name');
 
 
-        $ticket = Ticket::where('ticket_id',$tkt)->first();
+        $wahana = Ticket::where('wahana_id',$tkt)->first();
 
 
-        return view ('/ticket.edit',compact('ticket','authposition','authname'));
+        return view ('/wahana.edit',compact('wahana','authposition','authname'));
     }
 
     
      
     public function update(Request $request, $tkt)
     {
-        $ticket = Ticket::find($tkt);
+        $wahana = Ticket::find($tkt);
 
         if ($request->hasFile('image')){
             $file = $request ->file('image');
@@ -99,19 +99,19 @@ class TicketController extends Controller
             $file->move('image', $newName);
         }
 
-        $ticket->ticket_name = $request->name;
-        $ticket->price = $request->price;
-        $ticket->image = $newName;
-        $ticket->save();
+        $wahana->wahana_name = $request->name;
+        $wahana->price = $request->price;
+        $wahana->image = $newName;
+        $wahana->save();
 
 
-       return redirect()->route('ticket.index')->with('Status', 'data tiket berhasil diedit!');
+       return redirect()->route('wahana.index')->with('Status', 'data tiket berhasil diedit!');
     }
 
    
     public function destroy($id)
     {
-        $ticket=Ticket::where('ticket_id','=',$id)->delete();
-        return redirect()->route('ticket.index')->with('Status', 'data tiket berhasil dihapus!');
+        $wahana=Ticket::where('wahana_id','=',$id)->delete();
+        return redirect()->route('wahana.index')->with('Status', 'data tiket berhasil dihapus!');
     }
 }

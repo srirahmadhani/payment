@@ -8,7 +8,7 @@
             });
 
             $(document).on('click', '.pilih_pegawai', function (e) {
-                document.getElementById("employee_id").value = $(this).attr('data-employee_id');
+                document.getElementById("employee_nik").value = $(this).attr('data-employee_nik');
                 document.getElementById("employee_name").value = $(this).attr('data-employee_name');
                 $('#myModal2').modal('hide');
             });

@@ -66,7 +66,7 @@ class TopupController extends Controller
             'topup_date' => date(now()),
             'amount' => $request->amount,
             'id_visitor' => $request->visitor_id,
-            'employee_id' => $request->pegawai
+            'employee_nik' => $request->pegawai
         ]);
 
         DB::commit();

@@ -100,9 +100,9 @@
                <div class="col-sm-12">
                   <select class="form-control" id="tahun">
                      <option value="">-- Pilih Tahun ---</option>
-                     @foreach($paymenttahun as $datatahun)
-                     <option value="{{ $datatahun->payment_date }}">
-                        {{ $datatahun->payment_date }}</option>
+                     @foreach($transactiontahun as $datatahun)
+                     <option value="{{ $datatahun->transaction_date }}">
+                        {{ $datatahun->transaction_date }}</option>
                      @endforeach
                   </select>
                   <script>
@@ -131,9 +131,9 @@
                <div class="col-sm-12">
                   <select class="form-control" id="tahundonat">
                      <option value="">-- Pilih Tahun ---</option>
-                     @foreach($paymenttahun as $datatahun)
-                     <option value="{{ $datatahun->payment_date }}">
-                        {{ $datatahun->payment_date }}</option>
+                     @foreach($transactiontahun as $datatahun)
+                     <option value="{{ $datatahun->transaction_date }}">
+                        {{ $datatahun->transaction_date }}</option>
                      @endforeach
                   </select>
                   <script>
@@ -157,15 +157,15 @@
 
 <script>
    $(document).ready(function () {
-      var payments_year = <?=json_encode($payments_report)?>;
+      var transactions_year = <?=json_encode($transactions_report)?>;
       var labels = [];
       var data = [];
-      var banyak_data = payments_year.length;
+      var banyak_data = transactions_year.length;
 
       for(var x = 0;  x < banyak_data; x++)
       {
-         labels.push(payments_year[x].bulan.substr(0, 3));
-         data.push(payments_year[x].total);
+         labels.push(transactions_year[x].bulan.substr(0, 3));
+         data.push(transactions_year[x].total);
       }
    new Chart(document.getElementById("line-chart"), {
    type: 'line',
@@ -182,7 +182,7 @@
       legend: { display: false },
       title: {
       display: true,
-      text: 'Payment Tahun : <?=$year?>',
+      text: 'Transaction Tahun : <?=$year?>',
       }
    }
    });

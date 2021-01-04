@@ -9,30 +9,30 @@
 <div class="container">
 <div class="card">
 <div class="card-header">
-   <h6 class="m-0 font-weight-bold text-primary">Detail <b>{{$ticket->ticket_name}}</b></h6>
+   <h6 class="m-0 font-weight-bold text-primary">Detail <b>{{$wahana->wahana_name}}</b></h6>
 </div>
 <div class="card-body">
 <div class="form-group">
 <div class="form-group">
    <div class="col-md-6">
-      <img width="500" height="320" @if($ticket->image) 
-      src="{{ asset('image/'.$ticket->image) }}" @endif />
+      <img width="500" height="320" @if($wahana->image) 
+      src="{{ asset('image/'.$wahana->image) }}" @endif />
    </div>
 </div>
 <div class="form-group">
 <label for="id" class="col-md-2 control-label" >ID</label>
 <div class="col-md-6">
-   <input type="text" class="form-control" name="id" value="{{ $ticket->ticket_id }}" readonly="">
+   <input type="text" class="form-control" name="id" value="{{ $wahana->wahana_id }}" readonly="">
 </div>
 <div class="form-group">
 <label for="name" class="col-md-2 control-label" >Nama Tiket</label>
 <div class="col-md-6">
-   <input type="text" class="form-control" name="name" value="{{ $ticket->ticket_name}}" readonly="">
+   <input type="text" class="form-control" name="name" value="{{ $wahana->wahana_name}}" readonly="">
 </div>
 <div class="form-group">
    <label for="price" class="col-md-2 control-label" >Tarif</label>
    <div class="col-md-6">
-      <input type="text" class="form-control" name="price" value="{{ $ticket->price }}" readonly="">
+      <input type="text" class="form-control" name="price" value="{{ $wahana->price }}" readonly="">
    </div>
   
 </div>

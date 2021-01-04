@@ -17,27 +17,29 @@ class Visitor extends Model
     // protected $keyType = 'string';
 
     protected $fillable = [
-        'visitor_id', 'visitor_name', 'gender', 'address'
+        'visitor_id',
+        'visitor_name',
+        'gender',
+        'address',
+        'username',
+        'password',
+        'status'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'visitor_id', 'id');
-    }
 
-    public function payment()
+    public function transaction()
     {
-        return $this->hasMany(Payment::class, 'visitor_id', 'visitor_id');
+        return $this->hasMany(Transaction::class, 'visitor_id', 'visitor_id');
     }
 
     public function topup()
     {
-        return $this->hasMany(Topup::class, 'visitor_id', 'visitor_id');
+        return $this->hasMany(HistoryTopup::class, 'visitor_id', 'visitor_id');
     }
 
 
     public function getVisitorSaldoTotal()
     {
-        return DB::select("SELECT SUM(( SELECT IFNULL(SUM(amount), 0) FROM topup WHERE id_visitor = visit.visitor_id ) - ( SELECT IFNULL(SUM(total), 0) FROM payments WHERE visitor_id = visit.visitor_id )) AS saldo FROM `visitors` visit");
+        return DB::select("SELECT SUM(( SELECT IFNULL(SUM(amount), 0) FROM topup WHERE id_visitor = visit.visitor_id ) - ( SELECT IFNULL(SUM(total), 0) FROM transactions WHERE visitor_id = visit.visitor_id )) AS saldo FROM `visitors` visit");
     }
 }

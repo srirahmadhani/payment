@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visitor;
 use App\User;
-use App\Payment;
+use App\Transaction;
 use App\Topup;
 use App\Employee;
 use App\Position;

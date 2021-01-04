@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title') Payment @endsection
+@section('title') Transaction @endsection
 @section('heading')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
    <h1 class="h3 mb-0 text-gray-800"></h1>
@@ -9,10 +9,10 @@
 <div class="container">
    <div class="card">
       <div class="card-header">
-         <h6 class="m-0 font-weight-bold text-primary">Form Tambah Payment</h6>
+         <h6 class="m-0 font-weight-bold text-primary">Form Tambah Transaction</h6>
       </div>
       <div class="card-body">
-         <form method="POST" action="{{route('payment.store')}}" enctype="multipart/form-data">
+         <form method="POST" action="{{route('transaction.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                <label for="nama">ID</label>
@@ -75,8 +75,8 @@
                <label for="tiket">Ticket</label>
                <select  class="form-control" id="tiket" name="tiket"  required>
                   <option value=""disabled selected>--Pilih--</option>
-                  @foreach ($ticket as $tkt)
-                  <option value="{{$tkt->ticket_id}}">{{$tkt->ticket_id}}-{{$tkt->ticket_name}}-{{$tkt->price}}</option>
+                  @foreach ($wahana as $tkt)
+                  <option value="{{$tkt->wahana_id}}">{{$tkt->wahana_id}}-{{$tkt->wahana_name}}-{{$tkt->price}}</option>
                   @endforeach
                </select>
             </div>
@@ -141,7 +141,7 @@
 
 
       <button type="submit" class="btn btn-primary">Tambah Data</button>
-      <a href="{{route('payment.index')}}" class="btn btn-light pull-right">Kembali</a>
+      <a href="{{route('transaction.index')}}" class="btn btn-light pull-right">Kembali</a>
    </div>
    </form>
 </div>

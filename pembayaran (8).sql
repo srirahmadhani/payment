@@ -35,14 +35,14 @@ CREATE TABLE `employees` (
   `phone` varchar(13) NOT NULL,
   `address` text NOT NULL,
   `id_position` varchar(5) NOT NULL,
-  `employee_id` int(11) NOT NULL
+  `employee_nik` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `employees`
 --
 
-INSERT INTO `employees` (`NIK`, `employee_name`, `gender`, `phone`, `address`, `id_position`, `employee_id`) VALUES
+INSERT INTO `employees` (`NIK`, `employee_name`, `gender`, `phone`, `address`, `id_position`, `employee_nik`) VALUES
 ('1234567890123451', 'admin', 'P', '03837363635', 'payakumbuh', 'KS2', 15),
 ('1234567890123455', 'Kasir', 'P', '08765432357', 'payakumbuh', 'KS3', 16),
 ('1234567890123452', 'Manajer', 'P', '03837363635', 'payakumbuh', 'KS1', 17),
@@ -86,38 +86,38 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `payments`
+-- Struktur dari tabel `transactions`
 --
 
-CREATE TABLE `payments` (
-  `payment_id` varchar(16) NOT NULL,
-  `payment_date` timestamp NOT NULL DEFAULT current_timestamp(),
+CREATE TABLE `transactions` (
+  `transaction_id` varchar(16) NOT NULL,
+  `transaction_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `qty` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `visitor_id` int(12) NOT NULL,
-  `ticket_id` varchar(4) NOT NULL,
-  `employee_id` int(11) NOT NULL
+  `wahana_id` varchar(4) NOT NULL,
+  `employee_nik` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `payments`
+-- Dumping data untuk tabel `transactions`
 --
 
-INSERT INTO `payments` (`payment_id`, `payment_date`, `qty`, `total`, `visitor_id`, `ticket_id`, `employee_id`) VALUES
+INSERT INTO `transactions` (`transaction_id`, `transaction_date`, `qty`, `total`, `visitor_id`, `wahana_id`, `employee_nik`) VALUES
 ('TR000000001', '2020-09-05 04:29:50', 1, 5000, 24, 'WS01', 31),
 ('TR000000002', '2020-09-05 04:44:27', 1, 5000, 24, 'WS01', 15),
 ('TR000000003', '2020-09-07 03:29:10', 1, 5000, 24, 'WS01', 16),
 ('TR000000004', '2020-09-07 04:19:51', 1, 5000, 24, 'WS01', 16);
 
 --
--- Trigger `payments`
+-- Trigger `transactions`
 --
 DELIMITER $$
-CREATE TRIGGER `hapusPaymentSaldoVisitor` AFTER DELETE ON `payments` FOR EACH ROW UPDATE visitors SET saldo = saldo + old.total WHERE visitor_id = old.visitor_id
+CREATE TRIGGER `hapusTransactionSaldoVisitor` AFTER DELETE ON `transactions` FOR EACH ROW UPDATE visitors SET saldo = saldo + old.total WHERE visitor_id = old.visitor_id
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `kurangiSaldoVisitor` AFTER INSERT ON `payments` FOR EACH ROW UPDATE visitors SET saldo = saldo - new.total WHERE visitor_id = NEW.visitor_id
+CREATE TRIGGER `kurangiSaldoVisitor` AFTER INSERT ON `transactions` FOR EACH ROW UPDATE visitors SET saldo = saldo - new.total WHERE visitor_id = NEW.visitor_id
 $$
 DELIMITER ;
 
@@ -145,22 +145,22 @@ INSERT INTO `positions` (`position_id`, `position_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tickets`
+-- Struktur dari tabel `wahanas`
 --
 
-CREATE TABLE `tickets` (
-  `ticket_id` varchar(4) NOT NULL,
-  `ticket_name` varchar(30) NOT NULL,
+CREATE TABLE `wahanas` (
+  `wahana_id` varchar(4) NOT NULL,
+  `wahana_name` varchar(30) NOT NULL,
   `price` int(11) NOT NULL,
   `image` varchar(64) NOT NULL,
   `info` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tickets`
+-- Dumping data untuk tabel `wahanas`
 --
 
-INSERT INTO `tickets` (`ticket_id`, `ticket_name`, `price`, `image`, `info`) VALUES
+INSERT INTO `wahanas` (`wahana_id`, `wahana_name`, `price`, `image`, `info`) VALUES
 ('WS01', 'Tiket Masuk', 5000, 'WS01_gambar.jpg', 'umum'),
 ('WS02', 'Tiket Kampung Eropa', 15000, 'WS02_gambar.jpg', 'umum'),
 ('WS03', 'Tiket Flying Fox', 15000, 'WS03_gambar.jpeg', 'umum'),
@@ -18808,36 +18808,36 @@ INSERT INTO `times` (`id`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `topup`
+-- Struktur dari tabel `historytopup`
 --
 
-CREATE TABLE `topup` (
-  `topup_id` varchar(16) NOT NULL,
-  `topup_date` timestamp NOT NULL DEFAULT current_timestamp(),
+CREATE TABLE `historytopup` (
+  `history_topupid` varchar(16) NOT NULL,
+  `history_topupdate` timestamp NOT NULL DEFAULT current_timestamp(),
   `amount` int(11) NOT NULL,
   `id_visitor` int(12) NOT NULL,
-  `employee_id` int(11) NOT NULL
+  `employee_nik` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `topup`
+-- Dumping data untuk tabel `historytopup`
 --
 
-INSERT INTO `topup` (`topup_id`, `topup_date`, `amount`, `id_visitor`, `employee_id`) VALUES
+INSERT INTO `historytopup` (`history_topupid`, `history_topupdate`, `amount`, `id_visitor`, `employee_nik`) VALUES
 ('TP000000001', '2020-09-05 04:20:34', 80000, 24, 15),
 ('TP000000002', '2020-09-05 04:21:38', 10000, 24, 16),
 ('TP000000003', '2020-09-05 04:24:10', 7000, 24, 31),
 ('TP000000004', '2020-09-07 03:32:16', 20000, 24, 16);
 
 --
--- Trigger `topup`
+-- Trigger `historytopup`
 --
 DELIMITER $$
-CREATE TRIGGER `hapusTopupSaldoVisitor` AFTER DELETE ON `topup` FOR EACH ROW UPDATE visitors SET saldo = saldo - old.amount WHERE visitor_id = old.id_visitor
+CREATE TRIGGER `hapusTopupSaldoVisitor` AFTER DELETE ON `historytopup` FOR EACH ROW UPDATE visitors SET saldo = saldo - old.amount WHERE visitor_id = old.id_visitor
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `tambahSaldoVisitor` AFTER INSERT ON `topup` FOR EACH ROW UPDATE visitors SET saldo = saldo + new.amount WHERE visitor_id = new.id_visitor
+CREATE TRIGGER `tambahSaldoVisitor` AFTER INSERT ON `historytopup` FOR EACH ROW UPDATE visitors SET saldo = saldo + new.amount WHERE visitor_id = new.id_visitor
 $$
 DELIMITER ;
 
@@ -18908,7 +18908,7 @@ INSERT INTO `visitors` (`visitor_code`, `visitor_name`, `gender`, `address`, `vi
 -- Indeks untuk tabel `employees`
 --
 ALTER TABLE `employees`
-  ADD PRIMARY KEY (`employee_id`),
+  ADD PRIMARY KEY (`employee_nik`),
   ADD UNIQUE KEY `NIK` (`NIK`),
   ADD KEY `id_jabatan` (`id_position`);
 
@@ -18925,13 +18925,13 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indeks untuk tabel `payments`
+-- Indeks untuk tabel `transactions`
 --
-ALTER TABLE `payments`
-  ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `id_kategori` (`ticket_id`),
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `id_kategori` (`wahana_id`),
   ADD KEY `visitor_id` (`visitor_id`),
-  ADD KEY `employee_id` (`employee_id`);
+  ADD KEY `employee_nik` (`employee_nik`);
 
 --
 -- Indeks untuk tabel `positions`
@@ -18940,10 +18940,10 @@ ALTER TABLE `positions`
   ADD PRIMARY KEY (`position_id`);
 
 --
--- Indeks untuk tabel `tickets`
+-- Indeks untuk tabel `wahanas`
 --
-ALTER TABLE `tickets`
-  ADD PRIMARY KEY (`ticket_id`);
+ALTER TABLE `wahanas`
+  ADD PRIMARY KEY (`wahana_id`);
 
 --
 -- Indeks untuk tabel `times`
@@ -18953,12 +18953,12 @@ ALTER TABLE `times`
   ADD KEY `tanggal` (`date`);
 
 --
--- Indeks untuk tabel `topup`
+-- Indeks untuk tabel `historytopup`
 --
-ALTER TABLE `topup`
-  ADD PRIMARY KEY (`topup_id`),
+ALTER TABLE `historytopup`
+  ADD PRIMARY KEY (`history_topupid`),
   ADD KEY `visitor_id` (`id_visitor`),
-  ADD KEY `employee_id` (`employee_id`);
+  ADD KEY `employee_nik` (`employee_nik`);
 
 --
 -- Indeks untuk tabel `users`
@@ -19007,17 +19007,17 @@ ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`id_position`) REFERENCES `positions` (`position_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `payments`
+-- Ketidakleluasaan untuk tabel `transactions`
 --
-ALTER TABLE `payments`
-  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `payments_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`wahana_id`) REFERENCES `wahanas` (`wahana_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_ibfk_3` FOREIGN KEY (`employee_nik`) REFERENCES `employees` (`employee_nik`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `topup`
+-- Ketidakleluasaan untuk tabel `historytopup`
 --
-ALTER TABLE `topup`
-  ADD CONSTRAINT `topup_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `historytopup`
+  ADD CONSTRAINT `historytopup_ibfk_1` FOREIGN KEY (`employee_nik`) REFERENCES `employees` (`employee_nik`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

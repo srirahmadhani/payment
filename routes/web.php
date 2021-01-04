@@ -30,8 +30,8 @@ Route::resource('visitor', 'VisitorController');
 
 //Tiket
 
-Route::resource('ticket', 'TicketController');
-Route::post('/ticket/{id}/update', 'ticketController@update')->name('ticket.update');
+Route::resource('wahana', 'TicketController');
+Route::post('/wahana/{id}/update', 'wahanaController@update')->name('wahana.update');
 
 //jabatan
 Route::resource('position', 'PositionController');
@@ -48,8 +48,8 @@ Route::get('/topup/print', 'TopupController@topupprint')->name('topup.print');
 Route::resource('topup', 'TopupController');
 date_default_timezone_set("ASIA/JAKARTA");
 
-//Payment
-Route::resource('payment', 'PaymentController');
+//Transaction
+Route::resource('transaction', 'TransactionController');
 
 
 
@@ -68,7 +68,7 @@ Route::post('/user/create/add', 'UserController@usercreateadd')->name('usercreat
 //report
 Route::get('/report/topup', 'ReportController@topupindex')->name('report.topup_report');
 
-Route::get('/report/payment_report', 'ReportController@paymentindex')->name('report.payment_report');
+Route::get('/report/transaction_report', 'ReportController@transactionindex')->name('report.transaction_report');
 
 Route::get('/visitor/cetak/qr/{id}', 'VisitorController@cetakqrvisitor')->name('visitor.cetakqr');
 

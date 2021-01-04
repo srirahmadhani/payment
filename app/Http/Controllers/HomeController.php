@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Visitor;
 use App\Employee;
 use App\Ticket;
-use App\Payment;
+use App\Transaction;
 use Auth;
 use DB;
 
@@ -31,14 +31,14 @@ class HomeController extends Controller
 
         $visitor = Visitor::get();
         $employee   = Employee::get();
-        $ticket     = Ticket::get();
-        $payment = new Payment();
-        $payments_report = $payment->reportPaymentsPerYear($year);
+        $wahana     = Ticket::get();
+        $transaction = new Transaction();
+        $transactions_report = $transaction->reportTransactionsPerYear($year);
 
-        $tiket = new Payment();
-        $tiket_report = $tiket->reportPaymentsPerYearDonat($yeard);
+        $tiket = new Transaction();
+        $tiket_report = $tiket->reportTransactionsPerYearDonat($yeard);
 
-        $paymenttahun = Payment::distinct()->select(DB::raw('YEAR(payment_date) AS payment_date'))->get();
+        $transactiontahun = Transaction::distinct()->select(DB::raw('YEAR(transaction_date) AS transaction_date'))->get();
         
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
@@ -46,12 +46,12 @@ class HomeController extends Controller
 
         $jml_visitor = Visitor::all()->count();
         $jml_tiket = Ticket::all()->count();
-        $total_payment = DB::table('payments')->sum('total');
+        $total_transaction = DB::table('transactions')->sum('total');
          $saldo_total = DB::table('visitors')->sum('saldo');
         $visitor = new visitor();
         $total_saldo =$visitor->getVisitorSaldoTotal();
 
-        return view('home', compact('visitor', 'employee', 'ticket', 'authposition', 'authname', 'payments_report', 'paymenttahun', 'year', 'tiket_report', 'yeard', 'jml_visitor', 'jml_tiket', 'total_payment', 'total_saldo','saldo_total'));
+        return view('home', compact('visitor', 'employee', 'wahana', 'authposition', 'authname', 'transactions_report', 'transactiontahun', 'year', 'tiket_report', 'yeard', 'jml_visitor', 'jml_tiket', 'total_transaction', 'total_saldo','saldo_total'));
 
 
     }

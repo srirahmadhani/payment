@@ -14,7 +14,7 @@
       <link href="{{asset('/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
       </head>
       <div class="text-right">
-         <a href="{{url('/ticket/create')}}" class="btn btn-primary btn-rounded"> 
+         <a href="{{url('/wahana/create')}}" class="btn btn-primary btn-rounded"> 
          <i class="fa fa-plus"></i> Tambah Tiket</a>
          @if (session('Status'))
          <div class="alert alert-success">
@@ -38,24 +38,24 @@
       </tr>
    </thead>
    <tbody>
-      @foreach ($ticket as $tkt)
+      @foreach ($wahana as $tkt)
       <tr>
          <th scope="row">{{$loop->iteration}}</th>
-         <td>{{$tkt->ticket_id}}</td>
-         <td>{{$tkt->ticket_name}}</td>
+         <td>{{$tkt->wahana_id}}</td>
+         <td>{{$tkt->wahana_name}}</td>
          <td>@currency($tkt->price)</td>
          <td>
             <a href="{{url('image/'.$tkt->image)}}">{{$tkt->image}}</a>
          </td>
          
-         <form method="POST" action="{{route('ticket.destroy', $tkt->ticket_id)}}">
+         <form method="POST" action="{{route('wahana.destroy', $tkt->wahana_id)}}">
             @csrf
             @method('DELETE')
             <td> 
-               <a href="{{route('ticket.show',$tkt->ticket_id)}}" class="btn  btn-primary btn-sm d-inline"><i class="fas fa-eye"></i> </a>  
-               <a href="{{route('ticket.edit',$tkt->ticket_id)}}" class="btn  btn-success btn-sm d-inline"><i class="fas fa-edit"></i> </a>
+               <a href="{{route('wahana.show',$tkt->wahana_id)}}" class="btn  btn-primary btn-sm d-inline"><i class="fas fa-eye"></i> </a>  
+               <a href="{{route('wahana.edit',$tkt->wahana_id)}}" class="btn  btn-success btn-sm d-inline"><i class="fas fa-edit"></i> </a>
                <button href=
-                  "{{route('ticket.destroy',$tkt->ticket_id)}}" class="btn  btn-danger btn-sm" type="submit" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> 
+                  "{{route('wahana.destroy',$tkt->wahana_id)}}" class="btn  btn-danger btn-sm" type="submit" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> 
                <i class="fas fa-trash-alt"></i>
                </button>
             </td>

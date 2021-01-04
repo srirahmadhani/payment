@@ -12,7 +12,7 @@
    <h6 class="m-0 font-weight-bold text-primary">Form Tambah Tiket</h6>
 </div>
 <div class="card-body">
-   <form method="POST" action="{{route('ticket.store')}}" enctype="multipart/form-data" >
+   <form method="POST" action="{{route('wahana.store')}}" enctype="multipart/form-data" >
       @csrf
       <div class="form-group">
          <label for="nama">ID</label>

@@ -7,16 +7,21 @@ class Employee extends Model
 {
     public $timestamps = false;
 
-    protected $primaryKey = 'employee_id';
+    protected $primaryKey = 'employee_nik';
 
     protected $table = 'employees';
 
-    protected $fillable = ['employee_id','NIK', 'employee_name', 'gender', 'phone', 'address', 'id_position'];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class , 'employee_id', 'id');
-    }
+    protected $fillable = [
+        'employee_nik',
+        'employee_name',
+        'gender',
+        'phone',
+        'address',
+        'id_position',
+        'username',
+        'password',
+        'status'
+    ];
 
     public function position()
     {
@@ -25,12 +30,12 @@ class Employee extends Model
 
     public function topup()
     {
-        return $this->hasMany(Topup::class);
+        return $this->hasMany(HistoryTopup::class);
     }
 
-     public function payment()
+     public function transaction()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Transaction::class);
     }
 
 

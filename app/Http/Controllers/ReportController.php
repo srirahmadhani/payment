@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Topup;
-use App\Payment;
+use App\Transaction;
 use App\Employee;
 use Illuminate\Http\Request;
 use Auth;
@@ -46,22 +46,22 @@ class ReportController extends Controller
         
     }
 
- public function paymentindex(Request $request)
+ public function transactionindex(Request $request)
     {
         $html_report = "";
 
-        $payment = Payment::all();
+        $transaction = Transaction::all();
 
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
 
         if ($request->type == 'search') {
-            $payment = Payment::whereBetween(DB::raw('DATE(payment_date)'), [$request->date_start, $request->date_end])->get();
-            return view('report.payment_report', compact('payment', 'authposition', 'authname'));
+            $transaction = Transaction::whereBetween(DB::raw('DATE(transaction_date)'), [$request->date_start, $request->date_end])->get();
+            return view('report.transaction_report', compact('transaction', 'authposition', 'authname'));
             
         } elseif ($request->type == 'print') {
-            $payment = DB::table('payments')->leftJoin('tickets', 'tickets.ticket_id', '=', 'payments.ticket_id')->select('payments.ticket_id', 'tickets.ticket_name', DB::raw('SUM(payments.qty) as qty'), DB::raw('SUM(payments.total) as total'))->whereBetween(DB::raw('DATE(payments.payment_date)'), [$request->date_start, $request->date_end])->groupBy('payments.ticket_id')->get();
-            $html_report = view('report.payment_print', compact('payment', 'authposition', 'authname'))->render();
+            $transaction = DB::table('transactions')->leftJoin('wahanas', 'wahanas.wahana_id', '=', 'transactions.wahana_id')->select('transactions.wahana_id', 'wahanas.wahana_name', DB::raw('SUM(transactions.qty) as qty'), DB::raw('SUM(transactions.total) as total'))->whereBetween(DB::raw('DATE(transactions.transaction_date)'), [$request->date_start, $request->date_end])->groupBy('transactions.wahana_id')->get();
+            $html_report = view('report.transaction_print', compact('transaction', 'authposition', 'authname'))->render();
             $dompdf = new Dompdf();
             $dompdf->loadHtml($html_report);
 
@@ -74,9 +74,9 @@ class ReportController extends Controller
             // Output the generated PDF to Browser
             $dompdf->stream("laporan.pdf", array("Attachment" => false));
         } else {
-            $payment = Payment::get();
+            $transaction = Transaction::get();
 
-            return view('report.payment_report', compact('payment', 'authposition', 'authname'));
+            return view('report.transaction_report', compact('transaction', 'authposition', 'authname'));
         }
     }
     }

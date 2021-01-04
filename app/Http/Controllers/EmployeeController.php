@@ -61,7 +61,7 @@ class EmployeeController extends Controller
             'phone' => $request->phone, 
             'address' => $request->alamat, 
             'id_position' => $request->jabataan, 
-            'employee_id' => $id_user
+            'employee_nik' => $id_user
         ]);
 
         DB::commit();
@@ -73,10 +73,10 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = DB::table('employees')
-                ->join('users','users.id','=','employees.employee_id')
+                ->join('users','users.id','=','employees.employee_nik')
                 ->join('positions','positions.position_id','=','employees.id_position')
                 ->select('users.*','employees.*','positions.position_name')
-                ->where('employees.employee_id','=', $id)
+                ->where('employees.employee_nik','=', $id)
                 ->first();
 
         $authposition = session()->get('id_position');
@@ -137,7 +137,7 @@ class EmployeeController extends Controller
     {
         
         $user = User::where('id', '=', $id)->delete();
-        $employee = Employee::where('employee_id', '=', $id)->delete();
+        $employee = Employee::where('employee_nik', '=', $id)->delete();
 
         return redirect()
             ->route('employee.index')

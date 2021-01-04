@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Topup extends Model
+class HistoryTopup extends Model
 {
     public $timestamps = false;
 
-    protected $table = "topup";
+    protected $table = "history_topup";
 
     protected $primaryKey = 'topup_id';
 
     protected $keyType= 'string';
 
 	protected $fillable = [
-        'topup_id', 'topup_date', 'amount', 'id_visitor','employee_id',
+        'topup_id', 'topup_date', 'amount', 'id_visitor','employee_nik',
     ];
    
    public function visitor()
@@ -25,6 +25,6 @@ class Topup extends Model
 
     public function employee()
     {
-    	return $this->belongsTo(Employee::class, 'employee_id', 'employee_id');
+    	return $this->belongsTo(Employee::class, 'employee_nik', 'employee_nik');
     }
 }

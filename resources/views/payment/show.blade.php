@@ -9,49 +9,49 @@
 <div class="container">
 <div class="card">
 <div class="card-header">
-   <h6 class="m-0 font-weight-bold text-primary">Detail Pembayaran <b>{{$payment->payment_id}}</b></h6>
+   <h6 class="m-0 font-weight-bold text-primary">Detail Pembayaran <b>{{$transaction->transaction_id}}</b></h6>
 </div>
       <div class="card-body">
       <div class="form-group">
       <label for="id" class="col-md-2 control-label" >ID Pembayaran</label>
          <div class="col-md-6">
          <input type="text" class="form-control" name="id" 
-               value="{{ $payment->payment_id}}" readonly="">
+               value="{{ $transaction->transaction_id}}" readonly="">
          </div>
       
       <div class="form-group">
          <label for="address" class="col-md-2 control-label" >Tanggal Pembayaran</label>
          <div class="col-md-6">
             <input type="text" class="form-control"  
-               value="{{ $payment->payment_date}}" readonly="">
+               value="{{ $transaction->transaction_date}}" readonly="">
          </div>
 
       <div class="form-group">
       <label for="nama" class="col-md-2 control-label" >Pengunjung</label>
       <div class="col-md-6">
          <input type="text" class="form-control" 
-            value="{{ $payment->visitor_id}} - {{ $payment->visitor_name}}" readonly="">
+            value="{{ $transaction->visitor_id}} - {{ $transaction->visitor_name}}" readonly="">
       </div>
 
        <div class="form-group">
       <label for="nama" class="col-md-2 control-label" >Tiket</label>
       <div class="col-md-6">
          <input type="text" class="form-control"
-            value="{{ $payment->ticket_name}}" readonly="">
+            value="{{ $transaction->wahana_name}}" readonly="">
       </div>
 
      <div class="form-group">
       <label for="nama" class="col-md-2 control-label" >Jumlah Tiket</label>
       <div class="col-md-6">
          <input type="text" class="form-control" 
-            value="{{ $payment->qty}}" readonly="">
+            value="{{ $transaction->qty}}" readonly="">
       </div>
 
       <div class="form-group">
       <label for="nama" class="col-md-2 control-label" >Total</label>
       <div class="col-md-6">
          <input type="text" class="form-control" 
-            value="{{ $payment->total}}" readonly="">
+            value="{{ $transaction->total}}" readonly="">
       </div>
 
      

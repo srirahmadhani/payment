@@ -14,10 +14,10 @@
    <h6 class="m-0 font-weight-bold text-primary">Edit <b>{{$employee->employee_name}}</h6>
 </div>
 <div class="card-body">
-      <form method="POST" action="{{route('employee.update', $employee->employee_id)}}">
+      <form method="POST" action="{{route('employee.update', $employee->employee_nik)}}">
          @csrf
          @method('POST')
-            <input type="hidden" name="id_pengunjung" value="{{$employee->employee_id}}" readonly>
+            <input type="hidden" name="id_pengunjung" value="{{$employee->employee_nik}}" readonly>
 
          <div class="form-group">
             <label for="id">NIK</label>
