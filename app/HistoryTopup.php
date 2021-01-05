@@ -18,7 +18,7 @@ class HistoryTopup extends Model
         'topup_id', 'topup_date', 'amount', 'id_visitor','employee_nik',
     ];
    
-   public function visitor()
+    public function visitor()
     {
     	return $this->belongsTo(Visitor::class, 'id_visitor', 'visitor_id');
     }

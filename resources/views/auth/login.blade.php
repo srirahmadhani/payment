@@ -51,7 +51,7 @@ height: 100%;background-position: center;background-repeat: no-repeat;background
                             @endif
 
                     <div class="form-group">
-                      <input id="email" class="form-control form-control-user" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address...">
+                      <input id="email" class="form-control form-control-user" type="text" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Enter Username...">
                     </div>
                     <div class="form-group">
                       <input id="password" type="password" class="form-control form-control-user" name="password" required autocomplete="current-password" placeholder="Password">

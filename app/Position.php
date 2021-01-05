@@ -13,7 +13,9 @@ class Position extends Model
     protected $keyType= 'string';
 
 	protected $fillable = [
-        'position_id', 'position_name',];
+        'position_id',
+        'position_name'
+    ];
 
     public $timestamps = false;
 

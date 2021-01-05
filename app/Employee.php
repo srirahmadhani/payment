@@ -2,6 +2,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
 
 class Employee extends Model
 {
@@ -23,9 +25,39 @@ class Employee extends Model
         'status'
     ];
 
+    public static function autentikasi($username, $password)
+    {
+        $result = [
+            "status" => false,
+            "message" => "Username atau password salah!",
+            "data" => null
+        ];
+
+        // cek username
+        $data = self::where("username", $username)->get();
+        if(count($data) == 1)
+        {
+            if(Hash::check($password, $data[0]->password))
+            {
+                if($data[0]->status == 1)
+                {
+                    $result['status'] = true;
+                    $result['message'] = "Anda berhasil login!";
+                    $result['data'] = self::with(['position'])->where("username", $username)->first();
+                    unset($result['data']->password);
+                }
+                else
+                {
+                    $result['message'] = "Akun Anda tidak aktif. Silahkan hubungi admin!";
+                }
+            }
+        }
+        return $result;
+    }
+
     public function position()
     {
-        return $this->belongsTo(Position::class , 'id_position', 'position_id');
+        return $this->hasOne(Position::class , 'position_id', 'id_position');
     }
 
     public function topup()

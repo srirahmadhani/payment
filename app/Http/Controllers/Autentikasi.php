@@ -13,66 +13,21 @@ class Autentikasi extends Controller
 {
     public function cekLogin(Request $request)
     {
-        $data_login = $request->all();
-
-        $cek_email = User::where("email", $data_login['email'])->first();
-        if(!empty($cek_email))
+        $auth_check = Employee::autentikasi($request->input("username", ""), $request->input("password", ""));
+        
+        if($auth_check['status'] == true)
         {
-            $cek_password = Hash::check($data_login['password'], $cek_email->password);
-            if($cek_password)
-            {
-
-                if($cek_email->level == 2)
-                {
-                    return redirect()->route('login')->with('Status', "Email atau assword salah!");
-                }   
-
-                if($cek_email->status == 0)
-                {
-                    return redirect()->route('login')->with('Status', "Akun Anda tidak aktif. Silahkan hubungi administrator!");
-                }
-
-                $detail = Employee::find($cek_email->id);
-
-                if(!in_array($detail->id_position, array("KS1", "KS2", "KS3")))
-                {
-                    return redirect()->route('login')->with('Status', "Email atau assword salah!");
-                }
-
-                $name = $detail->employee_name;
-                $nik = $detail->NIK;
-                $employee_name = $detail->employee_name;
-                $gender = $detail->gender;
-                $phone = $detail->phone;
-                $address = $detail->address;
-                $id_position = $detail->id_position;
-
-                $request->session()->put("id", $cek_email->id);
-                $request->session()->put("email", $cek_email->email);
-                $request->session()->put("level", $cek_email->level);
-                $request->session()->put("name", $name);
-                $request->session()->put("NIK", $nik);
-                $request->session()->put("gender", $gender);
-                $request->session()->put("phone", $phone);
-                $request->session()->put("address", $address);
-                $request->session()->put("id_position", $id_position);
-
-                if($id_position == "KS3")
-                {
-                    return redirect()->route('topup.index')->with('Status', "Anda berhasil login!");
-                }
-
-                return redirect()->route('home')->with('Status', "Anda berhasil login!");
-
-            }
-            else
-            {
-                return redirect()->route('login')->with('Status', "Email atau assword salah!");
-            }
+            $request->session()->put("employee_nik", $auth_check['data']->employee_nik);
+            $request->session()->put("employee_name", $auth_check['data']->employee_name);
+            $request->session()->put("gender", $auth_check['data']->gender);
+            $request->session()->put("id_position", $auth_check['data']->id_position);
+            $request->session()->put("username", $auth_check['data']->username);
+            $request->session()->put("position_name", $auth_check['data']->position->position_name);
+            return redirect()->route('login')->with('Status', $auth_check['message']);
         }
         else
-        {   
-            return redirect()->route('login')->with('Status', "Email salah!");
+        {
+            return redirect()->route('login')->with('Status', $auth_check['message']);
         }
     }
 
