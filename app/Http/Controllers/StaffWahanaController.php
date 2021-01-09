@@ -15,10 +15,15 @@ class StaffWahanaController extends Controller
         $wahana_id = $request->input('wahana_id', "0");
         $wahana = Wahana::all();
         $employee = [];
-        $jadwal = StaffWahana::with(["wahana", "employee"])->get();
+        $jadwal = [];
         if($wahana_id != "0")
         {
+            $jadwal = StaffWahana::with(["wahana", "employee"])->where("wahana_id", $wahana_id)->where("date", $date)->get();
             $employee = Employee::whereNotIn("employee_nik", StaffWahana::select("employee_nik")->where("date", $date)->get())->get();
+        }
+        else
+        {
+            $jadwal = StaffWahana::with(["wahana", "employee"])->where("date", $date)->get();
         }
         
         return view('staffwahana.index', compact("date", "wahana", "wahana_id", "employee", "jadwal"));
@@ -33,12 +38,12 @@ class StaffWahanaController extends Controller
         }
         else
         {
-            $no_urut = (int) substr($max, 2, 2) + 1;
-            $kode = "SW" .sprintf("%05s", $no_urut);
+            $no_urut = (int) str_replace("SW", "", $max) + 1;
+            $kode = "SW" .str_pad($no_urut,6,"0", STR_PAD_LEFT);
         }
 
         StaffWahana::create([
-            "id_staf_wahana" => $kode,
+            "staff_wahana_id" => $kode,
             "wahana_id" => $request->input("wahana_id"),
             "date" => $request->input("date"),
             "employee_nik" => $request->input("employee_nik")

@@ -8,12 +8,12 @@ class StaffWahana extends Model
 {
     Protected $table = "staff_wahana";
 
-    protected $primaryKey = 'id_staff_wahana';
+    protected $primaryKey = 'staff_wahana_id';
 
     protected $keyType= 'string';
 
 	protected $fillable = [
-        'id_staff_wahana',
+        'staff_wahana_id',
         'employee_nik',
         'wahana_id',
         'date'
