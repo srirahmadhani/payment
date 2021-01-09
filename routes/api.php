@@ -7,7 +7,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', "API\Autentikasi@cekLogin");
-Route::get('/wahana/{wahana_id?}', "API\TicketApi@index");
+Route::get('/wahana/{wahana_id?}', "API\WahanaApi@index");
 Route::get('/topup/{id_visitor?}', "API\TopupApi@index");
 Route::get('/transaction/{id_visitor?}', "API\TransactionApi@index");
 Route::get('/visitor/{visitor_id?}', "API\VisitorApi@index");

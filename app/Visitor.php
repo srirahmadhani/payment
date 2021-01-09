@@ -32,7 +32,7 @@ class Visitor extends Model
         return $this->hasMany(Transaction::class, 'visitor_id', 'visitor_id');
     }
 
-    public function topup()
+    public function history_topup()
     {
         return $this->hasMany(HistoryTopup::class, 'visitor_id', 'visitor_id');
     }
@@ -40,6 +40,6 @@ class Visitor extends Model
 
     public function getVisitorSaldoTotal()
     {
-        return DB::select("SELECT SUM(( SELECT IFNULL(SUM(amount), 0) FROM topup WHERE id_visitor = visit.visitor_id ) - ( SELECT IFNULL(SUM(total), 0) FROM transactions WHERE visitor_id = visit.visitor_id )) AS saldo FROM `visitors` visit");
+        return DB::select("SELECT SUM(( SELECT IFNULL(SUM(amount), 0) FROM history_topup WHERE id_visitor = visit.visitor_id ) - ( SELECT IFNULL(SUM(total), 0) FROM transactions WHERE visitor_id = visit.visitor_id )) AS saldo FROM `visitors` visit");
     }
 }

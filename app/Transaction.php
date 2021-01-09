@@ -31,7 +31,7 @@ class Transaction extends Model
 
     public function wahana()
     {
-        return $this->belongsTo(Ticket::class, 'wahana_id', 'wahana_id');
+        return $this->belongsTo(Wahana::class, 'wahana_id', 'wahana_id');
     }
 
       public function employee()
@@ -46,6 +46,6 @@ class Transaction extends Model
 
     public function reportTransactionsPerYearDonat($yeard)
     {
-        return DB::select("select wahanas.wahana_id, wahanas.wahana_name , IFNULL(total,0) as total from wahanas LEFT JOIN (SELECT wahana_id, (qty*count(wahana_id)) AS total FROM transactions WHERE year(transaction_date) = ? group by wahana_id ORDER BY transaction_date asc) wahanas_year ON wahanas.wahana_id = wahanas_year.wahana_id order by wahanas.wahana_name asc", [$yeard, $yeard]);
+        return DB::select("select wahana.wahana_id, wahana.wahana_name , IFNULL(total,0) as total from wahana LEFT JOIN (SELECT wahana_id, (qty*count(wahana_id)) AS total FROM transactions WHERE year(transaction_date) = ? group by wahana_id ORDER BY transaction_date asc) wahana_year ON wahana.wahana_id = wahana_year.wahana_id order by wahana.wahana_name asc", [$yeard, $yeard]);
     }
 }

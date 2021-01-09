@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Topup;
+use App\HistoryTopup;
 use App\Visitor;
 use App\Employee;
 use App\Position;
@@ -15,10 +15,10 @@ class TopupApi extends Controller
 {
    public function index(Request $request, $id_visitor = null)
    {
-        $topup = Topup::all();
+        $topup = HistoryTopup::all();
         if($id_visitor != null)
         {
-            $topup = Topup::where("id_visitor", $id_visitor)->get();
+            $topup = HistoryTopup::where("id_visitor", $id_visitor)->get();
         }
 
         return response()->json(ResponseOk($topup));
@@ -28,11 +28,11 @@ class TopupApi extends Controller
     {
         DB::beginTransaction();
 
-        $max = Topup::max('topup_id');
+        $max = HistoryTopup::max('topup_id');
         $no_urut = (int) substr($max, 9, 9) + 1;
         $kode = "TP" .sprintf("%09s", $no_urut);
 
-        $topup = Topup::create([
+        $topup = HistoryTopup::create([
             'topup_id' => $kode,
             'topup_date' => date(now()),
             'amount' => $request->amount,
@@ -41,7 +41,7 @@ class TopupApi extends Controller
         ]);
 
         DB::commit();
-        return response()->json(ResponseOk("Topup berhasil"));
+        return response()->json(ResponseOk("HistoryTopup berhasil"));
 
     }
 

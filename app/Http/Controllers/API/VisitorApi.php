@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Visitor;
 use App\User;
 use App\Transaction;
-use App\Topup;
+use App\HistoryTopup;
 use App\Employee;
 use App\Position;
 use App\Helper\MailHelper;

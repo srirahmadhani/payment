@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Topup;
+use App\HistoryTopup;
 use Illuminate\Http\Request;
 use App\Visitor;
 use App\Employee;
@@ -14,7 +14,7 @@ class TopupController extends Controller
 {
     public function index()
     {
-        $topup = Topup::all();
+        $topup = HistoryTopup::all();
 
         
         $authposition = session()->get('id_position');
@@ -23,9 +23,9 @@ class TopupController extends Controller
         return view('topup.index', compact('topup', 'authposition', 'authname'));
     }
 
-    public function topupprint(Request $request)
+    public function history_topupprint(Request $request)
     {
-        $topup = Topup::where('topup_id', '=', $request->id)->first();
+        $topup = HistoryTopup::where('topup_id', '=', $request->id)->first();
 
         
         $authposition = session()->get('id_position');
@@ -37,7 +37,7 @@ class TopupController extends Controller
     
     public function create()
     {
-        $max = Topup::max('topup_id');
+        $max = HistoryTopup::max('topup_id');
         $no_urut = (int) substr($max, 9, 9) + 1;
         $kode = "TP" .sprintf("%09s", $no_urut);
 
@@ -61,7 +61,7 @@ class TopupController extends Controller
             
         ]);
 
-        $topup = Topup::create([
+        $topup = HistoryTopup::create([
             'topup_id' => $request->id,
             'topup_date' => date(now()),
             'amount' => $request->amount,
@@ -76,8 +76,8 @@ class TopupController extends Controller
     
     public function destroy($id)
     {
-        $employee = Topup::where('topup_id', '=', $id)->delete();
-        return redirect()->route('topup.index')->with('Status', 'data topup berhasil dihapus!');
+        $employee = HistoryTopup::where('topup_id', '=', $id)->delete();
+        return redirect()->route('topup.index')->with('Status', 'data history_topup berhasil dihapus!');
     }
 
     

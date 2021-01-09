@@ -134,6 +134,16 @@
    <!-- Nav Item - Data Master -->
    @if(session()->get('id_position') == 'KS1')
    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_wahana" aria-expanded="true" aria-controls="collapsePages">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Wahana</span>
+      </a>
+      <div id="menu_wahana" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+         <a class="collapse-item" href="{{url('/staff-wahana')}}">Staff Wahana</a>
+      </div>
+   </li>
+   <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_laporan" aria-expanded="true" aria-controls="collapsePages">
       <i class="fas fa-fw fa-table"></i>
       <span>Laporan</span>

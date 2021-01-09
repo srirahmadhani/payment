@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transaction;
 use App\Visitor;
-use App\Ticket;
+use App\Wahana;
 use App\Employee;
 use App\Position;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +34,7 @@ class TransactionController extends Controller
         $kode = "TR" .sprintf("%09s", $no_urut);
 
         $visitor = Visitor::get();
-        $wahana = Ticket::get();
+        $wahana = Wahana::get();
 
         $authposition = session()->get('id_position');
         $authname = session()->get('name');
@@ -84,8 +84,8 @@ class TransactionController extends Controller
     {
         $transaction = DB::table('transactions')
                 ->join('visitors','visitors.visitor_id','=','transactions.visitor_id')
-                ->join('wahanas','wahanas.wahana_id','=','transactions.wahana_id')
-                ->select('transactions.*','visitors.*','wahanas.*')
+                ->join('wahana','wahana.wahana_id','=','transactions.wahana_id')
+                ->select('transactions.*','visitors.*','wahana.*')
                 ->where('transactions.transaction_id','=', $id)
                 ->first();
 

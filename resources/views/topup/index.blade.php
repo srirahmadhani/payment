@@ -13,7 +13,7 @@
          <!-- Custom styles for this page -->
          <link href="{{asset('/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
          <div class="text-right">
-            <a href="{{url('/topup/create')}}" class="btn btn-primary">Isi Topup</a>
+            <a href="{{url('/topup/create')}}" class="btn btn-primary">Isi HistoryTopup</a>
             @if (session('Status'))
             <div class="alert alert-success">
                {{ session('Status') }}

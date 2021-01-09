@@ -30,7 +30,7 @@ Route::resource('visitor', 'VisitorController');
 
 //Tiket
 
-Route::resource('wahana', 'TicketController');
+Route::resource('wahana', 'WahanaController');
 Route::post('/wahana/{id}/update', 'wahanaController@update')->name('wahana.update');
 
 //jabatan
@@ -66,7 +66,7 @@ Route::post('/user/create/add', 'UserController@usercreateadd')->name('usercreat
 
 
 //report
-Route::get('/report/topup', 'ReportController@topupindex')->name('report.topup_report');
+Route::get('/report/topup', 'ReportController@history_topupindex')->name('report.topup_report');
 
 Route::get('/report/transaction_report', 'ReportController@transactionindex')->name('report.transaction_report');
 
@@ -74,3 +74,7 @@ Route::get('/visitor/cetak/qr/{id}', 'VisitorController@cetakqrvisitor')->name('
 
 
 Route::get('/akun/aktivasi/{token}', 'VisitorController@aktivasiakun')->name('akun.aktivasi');
+
+Route::get('/staff-wahana', 'StaffWahanaController@index')->name('staffwahana.index');
+Route::post('/staff-wahana', 'StaffWahanaController@store')->name('staffwahana.store');
+Route::get('/staff-wahana/hapus/{staff_wahana_id}', 'StaffWahanaController@delete')->name('staffwahana.delete');

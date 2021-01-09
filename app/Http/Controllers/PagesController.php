@@ -12,7 +12,7 @@ class PagesController extends Controller
     }
 
 
-    public function topup()
+    public function history_topup()
     {
         return view('topup.index');
     }

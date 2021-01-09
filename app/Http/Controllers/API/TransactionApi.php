@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transaction;
 use App\Visitor;
-use App\Ticket;
+use App\Wahana;
 use App\Employee;
 use App\Position;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +19,11 @@ class TransactionApi extends Controller
    {
         if($id_visitor != null)
         {
-            $transaction = Transaction::select("*")->where("visitor_id", $id_visitor)->join("wahanas", "wahanas.wahana_id", "=", "transactions.wahana_id")->get();
+            $transaction = Transaction::select("*")->where("visitor_id", $id_visitor)->join("wahana", "wahana.wahana_id", "=", "transactions.wahana_id")->get();
         }
         else
         {
-            $transaction = Transaction::select("*")->join("wahanas", "wahanas.wahana_id", "=", "transactions.wahana_id")->get();
+            $transaction = Transaction::select("*")->join("wahana", "wahana.wahana_id", "=", "transactions.wahana_id")->get();
         }
 
         return response()->json(ResponseOk($transaction));

@@ -60,7 +60,7 @@ class Employee extends Model
         return $this->hasOne(Position::class , 'position_id', 'id_position');
     }
 
-    public function topup()
+    public function history_topup()
     {
         return $this->hasMany(HistoryTopup::class);
     }

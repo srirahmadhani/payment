@@ -20,4 +20,14 @@ class StaffWahana extends Model
     ];
 
     public $timestamps = false;
+
+    public function wahana()
+    {
+        return $this->hasOne(Wahana::class , 'wahana_id', 'wahana_id');
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class , 'employee_nik', 'employee_nik');
+    }
 }

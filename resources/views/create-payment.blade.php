@@ -72,7 +72,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label for="tiket">Ticket</label>
+               <label for="tiket">Wahana</label>
                <select  class="form-control" id="tiket" name="tiket"  required>
                   <option value=""disabled selected>--Pilih--</option>
                   @foreach ($wahana as $tkt)

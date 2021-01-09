@@ -23,7 +23,7 @@ class Autentikasi extends Controller
             $request->session()->put("id_position", $auth_check['data']->id_position);
             $request->session()->put("username", $auth_check['data']->username);
             $request->session()->put("position_name", $auth_check['data']->position->position_name);
-            return redirect()->route('login')->with('Status', $auth_check['message']);
+            return redirect()->route('home')->with('Status', $auth_check['message']);
         }
         else
         {
