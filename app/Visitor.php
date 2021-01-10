@@ -38,8 +38,14 @@ class Visitor extends Model
     }
 
 
-    public function getVisitorSaldoTotal()
+    public static function getVisitorSaldoTotal()
     {
         return DB::select("SELECT SUM(( SELECT IFNULL(SUM(amount), 0) FROM history_topup WHERE id_visitor = visit.visitor_id ) - ( SELECT IFNULL(SUM(total), 0) FROM transactions WHERE visitor_id = visit.visitor_id )) AS saldo FROM `visitors` visit");
+    }
+
+    public static function getVisitorSaldo($visitor_id)
+    {
+        return DB::select("SELECT SUM(( SELECT IFNULL(SUM(amount), 0) FROM history_topup WHERE id_visitor = ? ) - ( SELECT IFNULL(SUM(total), 0) FROM transactions WHERE visitor_id = ? )) AS saldo FROM `visitors` visit", [$visitor_id, $visitor_id])[0]["saldo"];
+
     }
 }

@@ -51,7 +51,7 @@ class HomeController extends Controller
         $jml_tiket = Wahana::all()->count();
         $total_transaction = DB::table('transactions')->sum('total');
         $visitor = new visitor();
-        $total_saldo =$visitor->getVisitorSaldoTotal();
+        $total_saldo = Visitor::getVisitorSaldoTotal();
 
         return view('home', compact('visitor', 'employee', 'wahana', 'authposition', 'authname', 'transactions_report', 'transactiontahun', 'year', 'tiket_report', 'yeard', 'jml_visitor', 'jml_tiket', 'total_transaction', 'total_saldo'));
 

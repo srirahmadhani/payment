@@ -54,7 +54,7 @@ class TransactionController extends Controller
 
 
         // cek saldo visitor
-        $saldo = Visitor::where("visitor_id", $request->visitor_id)->pluck('saldo')->first();
+        $saldo = Visitor::getVisitorSaldo($request->visitor_id);
 
         if($saldo < $request->total)
         {

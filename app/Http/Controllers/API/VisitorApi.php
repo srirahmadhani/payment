@@ -29,7 +29,7 @@ class VisitorApi extends Controller
                 "visitor_name"    => $visitor->visitor_name,
                 "gender"    => $visitor->gender,
                 "address"    => $visitor->address,
-                "saldo"    => $visitor->saldo,
+                "saldo"    => Visitor::getVisitorSaldo($visitor_id),
                 "id"    => $visitor->id,
                 "email"    => $user->email,
                 "level"    => $user->level,
