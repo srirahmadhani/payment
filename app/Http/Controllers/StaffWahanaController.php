@@ -31,19 +31,7 @@ class StaffWahanaController extends Controller
 
     public function store(Request $request)
     {
-        $max = StaffWahana::max('staff_wahana_id');
-        if(empty($max))
-        {
-            $kode = "SW000001";
-        }
-        else
-        {
-            $no_urut = (int) str_replace("SW", "", $max) + 1;
-            $kode = "SW" .str_pad($no_urut,6,"0", STR_PAD_LEFT);
-        }
-
         StaffWahana::create([
-            "staff_wahana_id" => $kode,
             "wahana_id" => $request->input("wahana_id"),
             "date" => $request->input("date"),
             "employee_nik" => $request->input("employee_nik")
@@ -52,11 +40,11 @@ class StaffWahanaController extends Controller
         return redirect("staff-wahana?date=".$request->input("date")."&wahana_id=".$request->input("wahana_id"));
     }
 
-    public function delete(Request $request, $staff_wahana_id)
+    public function delete(Request $request, $employee_nik)
     {
         $date = $request->input("date", date("Y-m-d"));
         $wahana_id = $request->input("wahana_id", "0");
-        StaffWahana::where('staff_wahana_id','=', $staff_wahana_id)->delete();
+        StaffWahana::deleteStaffWahana($employee_nik, $wahana_id, $date);
         return redirect("staff-wahana?date=".$date."&wahana_id=".$wahana_id);
     }
 }

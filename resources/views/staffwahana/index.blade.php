@@ -53,7 +53,6 @@
             <thead>
                <tr>
                   <th>#</th>
-                  <th>ID</th>
                   <th>Employee NIK</th>
                   <th>Employee Name</th>
                   <th>Wahana ID</th>
@@ -65,13 +64,12 @@
                @foreach ($jadwal as $jadwalstaff)
                <tr>
                   <th scope="row">{{$loop->iteration}}</th>
-                  <td>{{$jadwalstaff->staff_wahana_id }}</td>
                   <td>{{$jadwalstaff->employee->employee_nik}}</td>
                   <td>{{$jadwalstaff->employee->employee_name}}</td>
                   <td>{{$jadwalstaff->wahana->wahana_id}}</td>
                   <td>{{$jadwalstaff->wahana->wahana_name}}</td>
                   <td>
-                     <a href="{{ route('staffwahana.delete', ["staff_wahana_id" => $jadwalstaff->staff_wahana_id]) }}?date={{ $date }}&wahana_id={{ $wahana_id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                     <a href="{{ route('staffwahana.delete', ["employee_nik" => $jadwalstaff->employee_nik]) }}?date={{ $jadwalstaff->date }}&wahana_id={{ $jadwalstaff->wahana_id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                   </td>
                </tr>
                @endforeach

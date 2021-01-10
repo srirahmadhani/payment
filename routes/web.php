@@ -77,4 +77,4 @@ Route::get('/akun/aktivasi/{token}', 'VisitorController@aktivasiakun')->name('ak
 
 Route::get('/staff-wahana', 'StaffWahanaController@index')->name('staffwahana.index');
 Route::post('/staff-wahana', 'StaffWahanaController@store')->name('staffwahana.store');
-Route::get('/staff-wahana/hapus/{staff_wahana_id}', 'StaffWahanaController@delete')->name('staffwahana.delete');
+Route::get('/staff-wahana/hapus/{employee_nik}', 'StaffWahanaController@delete')->name('staffwahana.delete');
